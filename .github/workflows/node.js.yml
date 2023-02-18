@@ -15,6 +15,9 @@ jobs:
   build:
     # uses a Ubuntu Docker image (like a virtual machine)
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./journal-app
 
     steps:
       - uses: actions/checkout@v2
@@ -22,7 +25,7 @@ jobs:
         with:
           node-version: "14"
           cache: "npm"
-          cache-dependency-path: journal-app/package.json
+          cache-dependency-path: journal-app/package-lock.json
       # install dependencies
       - run: npm install
       - run: npm test
