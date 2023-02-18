@@ -27,7 +27,7 @@ jobs:
           cache: "npm"
           cache-dependency-path: journal-app/package-lock.json
       # install dependencies
-      - run: amplify init
+      #- run: amplify init
       - run: npm install
       - run: npm test
       - name: Deploy React to GitHub Pages
