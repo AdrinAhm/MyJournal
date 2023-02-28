@@ -43,7 +43,7 @@ const App = () => {
 
   return (
     <div style={styles.container}>
-      <h2>Amplify Todos</h2>
+      <h2 style={styles.header}>Journal</h2>
       <input
         onChange={event => setInput('name', event.target.value)}
         style={styles.input}
@@ -75,7 +75,8 @@ const styles = {
   input: { border: 'none', backgroundColor: '#ddd', marginBottom: 10, padding: 8, fontSize: 18 },
   todoName: { fontSize: 20, fontWeight: 'bold' },
   todoDescription: { marginBottom: 0 },
-  button: { backgroundColor: 'black', color: 'white', outline: 'none', fontSize: 18, padding: '12px 0px' }
+  button: { backgroundColor: 'black', color: 'white', outline: 'none', fontSize: 18, padding: '12px 0px' },
+  header: { justifyContent: 'center' }
 }
 
 export default App
