@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\journal-app",
+    "\\journal-app\\amplify",
+    "\\journal-app\\amplify\\backend",
+    "\\journal-app\\amplify\\backend\\api",
+    "\\journal-app\\amplify\\backend\\api\\journalapp",
+    "\\journal-app\\amplify\\backend\\api\\journalapp\\resolvers",
+    "\\journal-app\\amplify\\backend\\api\\journalapp\\stacks",
+    "\\journal-app\\amplify\\backend\\types",
+    "\\journal-app\\src"
+  ],
+  "PreviewInSolutionExplorer": false
+}
