@@ -6,7 +6,7 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import "./Push.css";
 class Push extends React.Component {
     constructor(props) {
         super(props);
@@ -40,7 +40,8 @@ class Push extends React.Component {
         const textareaStyle = {
             width: '99%',
             height: '400px',
-            resize: 'none'
+            resize: 'none',
+            fontSize: '20px'
         };
 
         const dropdownStyles = {
@@ -63,7 +64,7 @@ class Push extends React.Component {
 
         return (
             <div>
-                <h2>Push Page</h2>
+                <h1 style={{ textAlign: 'center',fontSize: '50px', color: '#FF4500'}}>MyJournal</h1>
                 <div>
                     <div>
                         <h3>Date</h3>

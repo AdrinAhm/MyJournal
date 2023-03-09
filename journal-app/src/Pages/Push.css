@@ -1,0 +1,15 @@
+@media all and (min-width: 480px) {
+    body {
+        background-color: rgb(246, 239, 207);
+        padding: 0 60px;
+    }
+
+    .Push {
+      padding: 60px 0;
+    }
+  
+    .Push form {
+      margin: 0 auto;
+      max-width: 320px;
+    }
+  }
