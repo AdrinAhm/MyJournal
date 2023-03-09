@@ -64,7 +64,7 @@ class Push extends React.Component {
 
         return (
             <div>
-                <h1 style={{ textAlign: 'center',fontSize: '50px', color: '#FF4500'}}>MyJournal</h1>
+                <h1 style={{ textAlign: 'center',fontSize: '50px', color: '#FF4500'}}>DayBook</h1>
                 <div>
                     <div>
                         <h3>Date</h3>
