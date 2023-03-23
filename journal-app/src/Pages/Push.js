@@ -68,23 +68,23 @@ class Push extends React.Component {
             fontSize: '20px'
         };
 
-        const dropdownStyles = {
-            control: (base) => ({
-                ...base,
-                width: '20px', // adjust the width of the dropdown container
-                height: '40px', // adjust the height of the dropdown container
-                minHeight: 'unset', // remove any minimum height restriction
-                boxShadow: 'none', // remove the default box shadow
-                border: '1px solid #ccc', // add a border
-                borderRadius: '4px', // add border radius
-                fontSize: '16px', // adjust the font size
-            }),
-            menu: (base) => ({
-                ...base,
-                width: '200px', // adjust the width of the dropdown menu
-                maxHeight: '200px', // set a maximum height for the dropdown menu
-            }),
-        };
+        // const dropdownStyles = {
+        //     control: (base) => ({
+        //         ...base,
+        //         width: '20px', // adjust the width of the dropdown container
+        //         height: '40px', // adjust the height of the dropdown container
+        //         minHeight: 'unset', // remove any minimum height restriction
+        //         boxShadow: 'none', // remove the default box shadow
+        //         border: '1px solid #ccc', // add a border
+        //         borderRadius: '4px', // add border radius
+        //         fontSize: '16px', // adjust the font size
+        //     }),
+        //     menu: (base) => ({
+        //         ...base,
+        //         width: '200px', // adjust the width of the dropdown menu
+        //         maxHeight: '200px', // set a maximum height for the dropdown menu
+        //     }),
+        // };
 
         return (
             <div>
@@ -99,10 +99,12 @@ class Push extends React.Component {
                     </div>
 
                     <div><h3>How was your day? (1-10)</h3>
-                        <Dropdown options={dayRatingOptions}
+                        {/* <Dropdown options={dayRatingOptions}
                             onChange={this._onSelect}
                             placeholder="Select an option"
-                            styles={dropdownStyles} />
+                            styles={dropdownStyles} /> */}
+                        <label for="quantity"></label>
+                        <input type="number" id="quantity" name="quantity" min="1" max="10"></input>
                     </div>
                     <br></br>
                     <h3>What happened today?</h3>
