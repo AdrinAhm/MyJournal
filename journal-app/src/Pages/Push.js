@@ -7,6 +7,8 @@ import 'react-dropdown/style.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import "./Push.css";
+import { Link } from "react-router-dom";
+
 class Push extends React.Component {
     constructor(props) {
         super(props);
@@ -18,10 +20,32 @@ class Push extends React.Component {
 
     handleDateChange(date) {
         this.setState({ selectedDate: date });
+        //save state and send state to database to pull
     }
 
     render() {
+        // const withRouter = Component => props => {
+        //     const location = useLocation();
+        //     const navigate = useNavigate();
+        //     const params = useParams();
+          
+        //     return (
+        //       <Component
+        //         {...props}
+        //         location={location}
+        //         navigate={navigate}
+        //         params={params}
+        //       />
+        //     );
+        //   };
+          
+        // //   export default withRouter;
 
+        // const CustomButton = withRouter(({ history }) => (
+        //     <button type='button' onClick={() => { history.push('/Login.js') }}>
+        //       Click Me!
+        //     </button>
+        //   ))
 
         const dayRatingOptions = [
             { value: 'rate1', label: '1' },
@@ -86,7 +110,7 @@ class Push extends React.Component {
 
                     </textarea>
                 </div>
-                <button>
+                <button onClick={event =>  window.location.href='/Login'}>
                     <h8>Save Journal Entry</h8>
                 </button>
             </div>
