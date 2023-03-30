@@ -8,24 +8,29 @@ import Login from './Pages/Login';
 import Push from './Pages/Push';
 import Layout from "./Pages/Layout"
 
-export default function MyApp() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Push />} />
-          <Route path="login" element={<Login />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
-}
+// export default function App() {
+//   return (
+    // <BrowserRouter>
+    //   <Routes>
+    //     <Route path="/" element={<Layout />}>
+    //       <Route index element={<Push />} />
+    //       <Route path="login" element={<Login />} />
+    //     </Route>
+    //   </Routes>
+    // </BrowserRouter>
+//   );
+// }
 
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-const root = ReactDOM.render(<MyApp />, document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'));
+// const root = ReactDOM.render(<MyApp />, document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Push />
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Push />} />
+        <Route path="login" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 // root.render(<MyApp />);
