@@ -9,6 +9,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import "./Push.css";
 import { useNavigate } from "react-router-dom";
 import { Constants } from "@aws-amplify/core";
+import process from 'process';
 
 function Push() {
     const [selectedDate, setSelectedDate] = useState(new Date())
@@ -36,16 +37,16 @@ function Push() {
         resize: 'none',
         fontSize: '20px'
     };
-    
-    const navigate = useNavigate(); 
+
+    const navigate = useNavigate();
     // const routeChange = () =>{ 
     //     let path = '/login'; 
     //     navigate(path);
     //   }
-    
+    const version = process.env.REACT_APP_VERSION;
     return (
         <div>
-            <h1 style={{ textAlign: 'center',fontSize: '50px', color: '#FF4500'}}>DayBook</h1>
+            <h1 style={{ textAlign: 'center', fontSize: '50px', color: '#FF4500' }}>DayBook</h1>
             <div>
                 <div>
                     <h3>Date</h3>
@@ -69,10 +70,14 @@ function Push() {
 
                 </textarea>
             </div>
-            <button onClick={() => navigate('/login', {replace: true})}>
+            <button onClick={() => navigate('/login', { replace: true })}>
                 <h8>Save Journal Entry</h8>
             </button>
+            <div>
+                <p>Version: {version}</p>
+            </div>
         </div>
+
     );
 };
 
