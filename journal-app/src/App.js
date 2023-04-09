@@ -18,7 +18,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route  path="/" element={<Auth />} />
+        <Route path="/" element={<Auth />} />
         <Route path="push" element={<Push/>}/>
       </Routes>
     </BrowserRouter>
