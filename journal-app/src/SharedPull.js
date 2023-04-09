@@ -10,25 +10,11 @@ import { useNavigate } from "react-router-dom";
 import { Constants } from "@aws-amplify/core";
 // import process from 'process';
 
-function Push() {
+function SharedPull() {
     const [selectedDate, setSelectedDate] = useState(new Date())
     const handleDateChange = (date) => {
         setSelectedDate(date)
     }
-
-    const dayRatingOptions = [
-        { value: 'rate1', label: '1' },
-        { value: 'rate2', label: '2' },
-        { value: 'rate3', label: '3' },
-        { value: 'rate4', label: '4' },
-        { value: 'rate5', label: '5' },
-        { value: 'rate6', label: '6' },
-        { value: 'rate7', label: '7' },
-        { value: 'rate8', label: '8' },
-        { value: 'rate9', label: '9' },
-        { value: 'rate10', label: '10' },
-    ];
-    const dayRatingDefaultOption = dayRatingOptions[0];
 
     const textareaStyle = {
         width: '99%',
@@ -41,7 +27,7 @@ function Push() {
     // const version = process.env.REACT_APP_VERSION;
     return (
         <div>
-            <h1 style={{ textAlign: 'center', fontSize: '50px', color: '#FF4500' }}>DayBook</h1>
+            <h1 style={{ textAlign: 'center', fontSize: '50px', color: '#FF4500' }}>Shared Pull</h1>
             <div>
                 <div>
                     <h3>Date</h3>
@@ -51,31 +37,13 @@ function Push() {
                     />
                 </div>
 
-                <div><h3>How was your day? (1-10)</h3>
-                    {/* <Dropdown options={dayRatingOptions}
-                        onChange={this._onSelect}
-                        placeholder="Select an option"
-                        styles={dropdownStyles} /> */}
-                    <label for="quantity"></label>
-                    <input type="number" id="quantity" name="quantity" min="1" max="10"></input>
-                </div>
                 <br></br>
-                <h3>What happened today?</h3>
-                <textarea style={textareaStyle}>
-
-                </textarea>
             </div>
             {/* <button onClick={() => navigate('/login', { replace: true })}>
                 <h8>Save Journal Entry</h8>
             </button> */}
             <button>
                 <h8>Save Journal Entry</h8>
-            </button>
-            <button onClick={() => navigate('/pull', { replace: true })}>
-                <h8>Pull Page</h8>
-            </button>
-            <button onClick={() => navigate('/sharedpull', { replace: true })}>
-                <h8>Shared Pull Page</h8>
             </button>
             {/* <div>
                 <p>Version: {version}</p>
@@ -85,4 +53,4 @@ function Push() {
     );
 };
 
-export default Push
+export default SharedPull

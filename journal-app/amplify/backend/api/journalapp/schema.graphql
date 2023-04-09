@@ -7,3 +7,49 @@ type Todo @model {
   name: String!
   description: String
 }
+type Book {
+  title: String
+  author: Author
+}
+
+type Author {
+  name: String
+  books: [Book]
+}
+
+type Query {
+  books: [Book]
+  authors: [Author]
+}
+
+type Mutation {
+  addBook(title: String, author: String): Book
+}
+
+mutation CreateBook {
+  addBook(title: "Fox in Socks", author: "Dr. Seuss") {
+    title
+    author {
+      name
+    }
+  }
+}
+
+query GetBooksAndAuthors {
+  books {
+    title
+  }
+
+  authors {
+    name
+  }
+}
+
+query GetBooks {
+  books {
+    title
+    author {
+      name
+    }
+  }
+}

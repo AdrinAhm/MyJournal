@@ -4,6 +4,8 @@ import "./App.css"
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom"
 import Auth from "./Auth"
 import Push from "./Push"
+import Pull from "./Pull"
+import SharedPull from "./SharedPull"
 
 
 
@@ -20,6 +22,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Auth />} />
         <Route path="push" element={<Push/>}/>
+        <Route path="pull" element={<Pull/>}/>
+        <Route path="sharedpull" element={<SharedPull/>}/>
       </Routes>
     </BrowserRouter>
   )
