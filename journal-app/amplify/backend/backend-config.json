@@ -18,5 +18,55 @@
       "providerPlugin": "awscloudformation",
       "service": "AppSync"
     }
+  },
+  "parameters": {
+    "AMPLIFY_storage_journals_arn": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "journals"
+        }
+      ]
+    },
+    "AMPLIFY_storage_journals_partitionKeyName": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "journals"
+        }
+      ]
+    },
+    "AMPLIFY_storage_journals_partitionKeyType": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "journals"
+        }
+      ]
+    },
+    "AMPLIFY_storage_journals_region": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "journals"
+        }
+      ]
+    },
+    "AMPLIFY_storage_journals_tableName": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "journals"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "journals": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB",
+      "serviceType": "imported"
+    }
   }
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Amplify, API, graphqlOperation } from 'aws-amplify'
-import { createTodo } from './graphql/mutations'
-import { listTodos } from './graphql/queries'
+import { createJournals } from './graphql/mutations'
+import { listJournals } from './graphql/queries'
 import DatePicker from 'react-datepicker';
 
 import awsExports from "./aws-exports";
@@ -19,28 +19,28 @@ const Pull = () => {
     }
 
   useEffect(() => {
-    fetchTodos()
+    fetchJournals()
   }, [])
 
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value })
   }
 
-  async function fetchTodos() {
+  async function fetchJournals() {
     try {
-      const todoData = await API.graphql(graphqlOperation(listTodos))
-      const todos = todoData.data.listTodos.items
+      const todoData = await API.graphql(graphqlOperation(listJournals))
+      const todos = todoData.data.listJournals.items
       setTodos(todos)
     } catch (err) { console.log('error fetching todos') }
   }
 
-  async function addTodo() {
+  async function addJournals() {
     try {
       if (!formState.name || !formState.description) return
       const todo = { ...formState }
       setTodos([...todos, todo])
       setFormState(initialState)
-      await API.graphql(graphqlOperation(createTodo, {input: todo}))
+      await API.graphql(graphqlOperation(createJournals, {input: todo}))
     } catch (err) {
       console.log('error creating todo:', err)
     }
@@ -67,7 +67,7 @@ const Pull = () => {
         value={formState.description}
         placeholder="Description"
       />
-      <button style={styles.button} onClick={addTodo}>Grab Journal</button>
+      <button style={styles.button} onClick={addJournals}>Grab Journal</button>
       {
         todos.map((todo, index) => (
           <div key={todo.id ? todo.id : index} style={styles.todo}>

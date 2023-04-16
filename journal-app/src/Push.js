@@ -8,6 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import "./Push.css";
 import { useNavigate } from "react-router-dom";
 import { Constants } from "@aws-amplify/core";
+// import { Text, Grid } from "@nextui-org/react";
 // import process from 'process';
 
 function Push() {
@@ -34,24 +35,25 @@ function Push() {
         width: '99%',
         height: '400px',
         resize: 'none',
-        fontSize: '20px'
+        fontSize: '20px',
+        
     };
 
     const navigate = useNavigate();
     // const version = process.env.REACT_APP_VERSION;
     return (
         <div>
-            <h1 style={{ textAlign: 'center', fontSize: '50px', color: '#FF4500' }}>DayBook</h1>
+            <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white' }}>MyJournal</h1>
             <div>
                 <div>
-                    <h3>Date</h3>
+                    <h3 style={{color: 'white'}}>Date</h3>
                     <DatePicker
                         selected={selectedDate}
                         onChange={handleDateChange}
                     />
                 </div>
 
-                <div><h3>How was your day? (1-10)</h3>
+                <div><h3 style={{color: 'white'}}>How was your day? (1-10)</h3>
                     {/* <Dropdown options={dayRatingOptions}
                         onChange={this._onSelect}
                         placeholder="Select an option"
@@ -60,23 +62,29 @@ function Push() {
                     <input type="number" id="quantity" name="quantity" min="1" max="10"></input>
                 </div>
                 <br></br>
-                <h3>What happened today?</h3>
+                <h3 style={{color: 'white'}}>What happened today?</h3>
                 <textarea style={textareaStyle}>
 
                 </textarea>
+                {/* <Grid.Container gap={0.5} css={{ mt: "4px" }}>
+                    <Grid>
+                        <Textarea placeholder="Default Textarea" width='100000'/>
+                    </Grid>
+                </Grid.Container> */}
+
             </div>
             {/* <button onClick={() => navigate('/login', { replace: true })}>
                 <h8>Save Journal Entry</h8>
             </button> */}
-            <button>
-                <h8>Save Journal Entry</h8>
-            </button>
-            <button onClick={() => navigate('/pull', { replace: true })}>
-                <h8>Pull Page</h8>
-            </button>
-            <button onClick={() => navigate('/sharedpull', { replace: true })}>
-                <h8>Shared Pull Page</h8>
-            </button>
+            <Button variant="light">
+                <h8 style={{color: 	'#14f165'}}>Save Journal Entry</h8>
+            </Button>
+            <Button onClick={() => navigate('/pull', { replace: true })} variant="light">
+                <h8 style={{color: 	'#14f165'}}>Pull Page</h8>
+            </Button>
+            <Button onClick={() => navigate('/sharedpull', { replace: true })} variant="light">
+                <h8 style={{color: 	'#14f165'}}>Shared Pull Page</h8>
+            </Button>
             {/* <div>
                 <p>Version: {version}</p>
             </div> */}

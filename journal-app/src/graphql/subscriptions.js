@@ -34,3 +34,63 @@ export const onDeleteTodo = /* GraphQL */ `
     }
   }
 `;
+export const onCreateJournals = /* GraphQL */ `
+  subscription OnCreateJournals(
+    $userID: String
+    $date: String
+    $rating: Int
+    $journal: String
+  ) {
+    onCreateJournals(
+      userID: $userID
+      date: $date
+      rating: $rating
+      journal: $journal
+    ) {
+      userID
+      date
+      rating
+      journal
+    }
+  }
+`;
+export const onUpdateJournals = /* GraphQL */ `
+  subscription OnUpdateJournals(
+    $userID: String
+    $date: String
+    $rating: Int
+    $journal: String
+  ) {
+    onUpdateJournals(
+      userID: $userID
+      date: $date
+      rating: $rating
+      journal: $journal
+    ) {
+      userID
+      date
+      rating
+      journal
+    }
+  }
+`;
+export const onDeleteJournals = /* GraphQL */ `
+  subscription OnDeleteJournals(
+    $userID: String
+    $date: String
+    $rating: Int
+    $journal: String
+  ) {
+    onDeleteJournals(
+      userID: $userID
+      date: $date
+      rating: $rating
+      journal: $journal
+    ) {
+      userID
+      date
+      rating
+      journal
+    }
+  }
+`;

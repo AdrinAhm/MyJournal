@@ -6,6 +6,7 @@ import Auth from "./Auth"
 import Push from "./Push"
 import Pull from "./Pull"
 import SharedPull from "./SharedPull"
+import React, { Component } from "react";
 
 
 

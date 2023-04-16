@@ -56,42 +56,32 @@ export const deleteTodo = /* GraphQL */ `
     }
   }
 `;
-export const createJournal = /* GraphQL */ `
-  mutation CreateJournal(
-    $input: CreateJournalInput!
-    $condition: ModelTodoConditionInput
-  ) {
-    createTodo(input: $input, condition: $condition) {
+export const createJournals = /* GraphQL */ `
+  mutation CreateJournals($input: CreateJournalsInput!) {
+    createJournals(input: $input) {
       userID
-      rating
       date
+      rating
       journal
     }
   }
 `;
-
-export const updateJournal = /* GraphQL */ `
-  mutation UpdateJournal(
-    $input: UpdateJournalInput!
-    $condition: ModelJournalConditionInput
-  ) {
-    updateJournal(input: $input, condition: $condition) {
+export const updateJournals = /* GraphQL */ `
+  mutation UpdateJournals($input: UpdateJournalsInput!) {
+    updateJournals(input: $input) {
       userID
-      rating
       date
+      rating
       journal
     }
   }
 `;
-export const deleteJournal = /* GraphQL */ `
-  mutation DeleteJournal(
-    $input: DeleteJournalInput!
-    $condition: ModelJournalConditionInput
-  ) {
-    deleteJournal(input: $input, condition: $condition) {
+export const deleteJournals = /* GraphQL */ `
+  mutation DeleteJournals($input: DeleteJournalsInput!) {
+    deleteJournals(input: $input) {
       userID
-      rating
       date
+      rating
       journal
     }
   }

@@ -56,28 +56,27 @@ export const listTodos = /* GraphQL */ `
     }
   }
 `;
-
 export const getJournals = /* GraphQL */ `
-  query GetJournal($id: ID!) {
-    getJournal(id: $id) {
+  query GetJournals($userID: String!) {
+    getJournals(userID: $userID) {
       userID
-      rating
       date
+      rating
       journal
     }
   }
 `;
 export const listJournals = /* GraphQL */ `
   query ListJournals(
-    $filter: ModelJournalFilterInput
+    $filter: TableJournalsFilterInput
     $limit: Int
     $nextToken: String
   ) {
     listJournals(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         userID
-        rating
         date
+        rating
         journal
       }
       nextToken
