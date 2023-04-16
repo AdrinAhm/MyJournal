@@ -12,9 +12,6 @@
       "AmplifyAppId": "d2cgu8cytvzu53"
     },
     "categories": {
-      "api": {
-        "journalapp": {}
-      },
       "storage": {
         "journals": {
           "tableName": "journals",
@@ -23,6 +20,9 @@
           "partitionKeyName": "userID",
           "partitionKeyType": "S"
         }
+      },
+      "api": {
+        "journalApp": {}
       }
     }
   }

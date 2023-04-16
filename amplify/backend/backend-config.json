@@ -1,15 +1,15 @@
 {
   "api": {
-    "journalapp": {
+    "journalApp": {
       "dependsOn": [],
       "output": {
         "authConfig": {
           "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDate": "2024-04-08T20:24:18.155Z",
-              "apiKeyExpirationDays": 365,
-              "description": "testing"
+              "apiKeyExpirationDate": "2023-04-23T22:45:58.139Z",
+              "apiKeyExpirationDays": 7,
+              "description": "For the journal"
             },
             "authenticationType": "API_KEY"
           }

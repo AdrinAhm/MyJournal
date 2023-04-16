@@ -77,13 +77,13 @@ function Push() {
                 <h8>Save Journal Entry</h8>
             </button> */}
             <Button variant="light">
-                <h8 style={{color: 	'#14f165'}}>Save Journal Entry</h8>
+                <h8 style={{color: 	'#000'}}>Save Journal Entry</h8>
             </Button>
             <Button onClick={() => navigate('/pull', { replace: true })} variant="light">
-                <h8 style={{color: 	'#14f165'}}>Pull Page</h8>
+                <h8 style={{color: 	'#000'}}>Pull Page</h8>
             </Button>
             <Button onClick={() => navigate('/sharedpull', { replace: true })} variant="light">
-                <h8 style={{color: 	'#14f165'}}>Shared Pull Page</h8>
+                <h8 style={{color: 	'#000'}}>Shared Pull Page</h8>
             </Button>
             {/* <div>
                 <p>Version: {version}</p>
