@@ -32,5 +32,4 @@ Start the development server: npm starts
 ## Usage
 To use the application, navigate to http://localhost:3000 in your web browser. You will be prompted to sign in or create an account. Once you have signed in, you will be taken to the main dashboard where you can create new journal entries, view existing entries, and share entries as needed.
 
-The application uses GraphQL to communicate with the backend and AWS Amplify to manage authentication, authorization, and data storage.MyJournal User Manual
-Welcome to MyJournal, a website that allows you to create, view, and share your journal entries.
+The application uses GraphQL to communicate with the backend and AWS Amplify to manage authentication, authorization, and data storage.
