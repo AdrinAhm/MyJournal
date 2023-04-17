@@ -6,9 +6,11 @@ This is a journaling application built using NPM, React, GraphQL, and AWS Amplif
 
 To get started with this application, you will need to have Node.js and NPM installed on your machine. You will also need an AWS account and an AWS Amplify project set up.
 
-Clone the repository: git clone https://github.com/username/repo.git
+Clone the repository: git clone https://github.com/AdrinAhm/MyJournal.git
 
 Install dependencies: npm install
+
+Install AWS Amplify: npm install -g @aws-amplify/cli
 
 Configure AWS Amplify: amplify configure
 
@@ -16,7 +18,15 @@ Initialize the project: amplify init
 
 Deploy the backend: amplify push
 
+Install React: npm install react
+
+Install React Router: npm install react-router-dom
+
+Install Date Picker: npm install react-datepicker
+
 Start the development server: npm starts
+
+
 
 
 ## Usage
