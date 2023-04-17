@@ -7,6 +7,7 @@ This is a journaling application built using NPM, React, GraphQL, and AWS Amplif
 To get started with this application, you will need to have Node.js and NPM installed on your machine. You will also need an AWS account and an AWS Amplify project set up.
 
 Clone the repository: git clone https://github.com/username/repo.git
+
 Install dependencies: npm install
 Configure AWS Amplify: amplify configure
 Initialize the project: amplify init
