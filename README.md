@@ -9,10 +9,14 @@ To get started with this application, you will need to have Node.js and NPM inst
 Clone the repository: git clone https://github.com/username/repo.git
 
 Install dependencies: npm install
+
 Configure AWS Amplify: amplify configure
+
 Initialize the project: amplify init
+
 Deploy the backend: amplify push
-Start the development server: npm start
+
+Start the development server: npm starts
 
 
 ## Usage
