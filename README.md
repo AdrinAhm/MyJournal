@@ -24,15 +24,28 @@ Install React Router: npm install react-router-dom
 
 Install Date Picker: npm install react-datepicker
 
-Start the development server: npm starts
+Start the development server: npm start
 
 
 
 
 ## Usage
 
-Start the development server: npm starts
+Start the development server: npm start
 
 To use the application, navigate to http://localhost:3000 in your web browser. You will be prompted to sign in or create an account. Once you have signed in, you will be taken to the main dashboard where you can create new journal entries, view existing entries, and share entries as needed.
 
 The application uses GraphQL to communicate with the backend and AWS Amplify to manage authentication, authorization, and data storage.
+
+## Contributing
+Instructions on how to contribute to the project, including guidelines for pull requests and code reviews.
+
+Fork the project.
+
+Create your feature branch: git checkout -b my-new-feature.
+
+Commit your changes: git commit -am 'Add some feature'.
+
+Push to the branch: git push origin my-new-feature.
+
+Submit a pull request.
