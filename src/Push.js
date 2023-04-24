@@ -48,65 +48,74 @@ function Push() {
         width: '80%',
         height: '400px',
         resize: 'none',
-        fontSize: '20px',
+        fontSize: '25px',
         display: 'inline-block',
-        textAlign: 'left'  
+        textAlign: 'left'
     };
 
     const navigate = useNavigate();
     // const version = process.env.REACT_APP_VERSION;
     return (
         <div style={{ backgroundImage: `url(${background})`, textAlign: 'center'}}>
-        <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white' }}>MyJournal</h1>
+        <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white',  fontFamily: 'cursive'}}>MyJournal</h1>
+
         <Navbar bg="light" expand="lg">
         <Container  >
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto" style={{ justifyContent: 'center', textAlign: 'center'}}>
-            <Nav.Link href="push">Write Journal</Nav.Link>
-            <Nav.Link href="pull">Previous Journals</Nav.Link>
+          <Nav className="mx-auto">
+            <Nav.Link href="push" style={{ marginRight: '250px' }}>Write Journal</Nav.Link>
+            <Nav.Link href="pull" style={{ marginRight: '250px' }}>Previous Journals</Nav.Link>
             <Nav.Link href="sharedpull">Shared Journals</Nav.Link>
           </Nav>
         </Navbar.Collapse>
         </Container>
         </Navbar>
-            
             <div>
-                <div>
-                    <h3 style={{color: 'white'}}>Date</h3>
-                    <DatePicker
-                        selected={selectedDate}
-                        onChange={handleDateChange}
-                    />
-                </div>
+            <br></br>
 
-                <div><h3 style={{color: 'white'}}>How was your day? (1-10)</h3>
-                    {/* <Dropdown options={dayRatingOptions}
-                        onChange={this._onSelect}
-                        placeholder="Select an option"
-                        styles={dropdownStyles} /> */}
-                    <label for="quantity"></label>
-                    <input type="number" id="quantity" name="quantity" min="1" max="10"></input>
+            <Navbar expand="lg"  style={{backgroundColor: 'transparent'}}>
+                <Container  >
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mx-auto flex-column">
+                        <h3 style={{color: 'white'}}>Date</h3>
+                        <DatePicker selected={selectedDate} onChange={handleDateChange} />
+                    </Nav>
+                    <Nav className="mx-auto flex-column">
+                        <h3 style={{color: 'white'}}>How was your day? (1-10)</h3>
+                        <label for="quantity"></label>
+                        <input type="number" id="quantity" name="quantity" min="1" max="10"></input>
+                     </Nav>
+                </Navbar.Collapse>
+                <style>
+                 {`.navbar {
+                     border-top-left-radius: 15px;
+                     border-top-right-radius: 15px;
+                     border-bottom-left-radius: 15px;
+                     border-bottom-right-radius: 15px;
+                     }`}
+      </style>
+             </Container>
+             </Navbar>
+                <div>
+                    
                 </div>
+                <br></br>
+                <br></br>
                 <br></br>
                 <h3 style={{color: 'white'}}>What happened today?</h3>
                 <textarea style={textareaStyle}>
 
                 </textarea>
-                {/* <Grid.Container gap={0.5} css={{ mt: "4px" }}>
-                    <Grid>
-                        <Textarea placeholder="Default Textarea" width='100000'/>
-                    </Grid>
-                </Grid.Container> */}
+
 
             </div>
-            {/* <button onClick={() => navigate('/login', { replace: true })}>
-                <h8>Save Journal Entry</h8>
-            </button> */}
-            {/* <Button variant="light">
+
+            <Button variant="light">
                 <h8 style={{color: 	'#000'}}>Save Journal Entry</h8>
             </Button>
-            <Button onClick={() => navigate('/pull', { replace: true })} variant="light">
+            {/* <Button onClick={() => navigate('/pull', { replace: true })} variant="light">
                 <h8 style={{color: 	'#000'}}>Pull Page</h8>
             </Button>
             <Button onClick={() => navigate('/sharedpull', { replace: true })} variant="light">
@@ -114,7 +123,12 @@ function Push() {
             </Button> */}
             {/* <div>
                 <p>Version: {version}</p>
-            </div> */}
+        </div>*/}
+             <br></br>
+             <br></br>
+             <br></br>
+             <br></br>
+
         </div>
     );
 };
