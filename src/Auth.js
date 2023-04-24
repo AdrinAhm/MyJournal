@@ -3,8 +3,28 @@ import React, { useState } from "react"
 import "./Auth.css"
 import App from "./App"; 
 import { useNavigate } from 'react-router-dom';
+import * as mutations from './graphql/mutations';
+import * as queries from './graphql/queries';
+
+const loginDetails = {
+  username,
+  password
+};
+
+const newLogin = await API.graphql({ 
+  query: mutations.createLogin, 
+  variables: { input: loginDetails }
+});
 
 export default function (props) {
+
+  const [usernameInput, setUsernameInput, passwordInput, setPasswordInput] = useState('')
+
+  const newLogin = (username, password) => {
+    console.log(username)
+    console.log(password)
+  }
+
   let [authMode, setAuthMode] = useState("signin")
   const navigate = useNavigate();
 
@@ -17,7 +37,7 @@ export default function (props) {
     // element.style.visibility = element.style.visibility === "visible" ? "hidden" : "visible"
     element.style.visibility = "visible"
   }
-
+  
   if (authMode === "signin") {
 
     return (
@@ -78,7 +98,7 @@ export default function (props) {
           <div className="form-group mt-3">
             <label>Full Name</label>
             <input
-              type="email"
+              type="name"
               className="form-control mt-1"
               placeholder="Full Name"
             />
@@ -89,6 +109,8 @@ export default function (props) {
               type="email"
               className="form-control mt-1"
               placeholder="Email Address"
+              value = {usernameInput}
+              onChange={e => setUsernameInput(e.target.value)}
             />
           </div>
           <div className="form-group mt-3">
@@ -97,11 +119,14 @@ export default function (props) {
               type="password"
               className="form-control mt-1"
               placeholder="Password"
+              value = {passwordInput}
+              onChange={e => setPasswordInput(e.target.value)}
             />
           </div>
           <div className="d-grid gap-2 mt-3">
             <button type="submit" className="btn-submit" onClick={() =>{
-                navigate('/push');
+                newLogin(usernameInput, passwordInput);
+                // navigate('/push');
             }}>
               Submit
             </button>
