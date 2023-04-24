@@ -8,6 +8,11 @@ import 'react-datepicker/dist/react-datepicker.css';
 import "./Push.css";
 import { useNavigate } from "react-router-dom";
 import { Constants } from "@aws-amplify/core";
+import background from "./backgroundimage.jpg";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 // import process from 'process';
 
 function SharedPull() {
@@ -26,8 +31,21 @@ function SharedPull() {
     const navigate = useNavigate();
     // const version = process.env.REACT_APP_VERSION;
     return (
-        <div>
-            <h1 style={{ textAlign: 'center', fontSize: '50px', color: '#FF4500' }}>Shared Pull</h1>
+        <div style={{ backgroundImage: `url(${background})` }}>
+        <h1 style={{ textAlign: 'center', fontSize: '50px', color: '#FF4500' }}>Shared Pull</h1>
+        <Navbar bg="light" expand="lg">
+        <Container>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="push">Write Journal</Nav.Link>
+            <Nav.Link href="pull">Previous Journals</Nav.Link>
+            <Nav.Link href="sharedpull">Shared Journals</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+        </Container>
+        </Navbar>
+            
             <div>
                 <div>
                     <h3>Date</h3>

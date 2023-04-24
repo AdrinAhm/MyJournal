@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState,useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Dropdown from 'react-dropdown';
@@ -8,6 +8,11 @@ import 'react-datepicker/dist/react-datepicker.css';
 import "./Push.css";
 import { useNavigate } from "react-router-dom";
 import { Constants } from "@aws-amplify/core";
+import background from "./backgroundimage.jpg";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+
 // import { Text, Grid } from "@nextui-org/react";
 // import process from 'process';
 
@@ -16,6 +21,12 @@ function Push() {
     const handleDateChange = (date) => {
         setSelectedDate(date)
     }
+    useEffect(() => {
+        document.body.style.margin = 0;
+        document.body.style.padding = 0;
+        document.body.style.width = '100%';
+      }, []);
+    
 
     const dayRatingOptions = [
         { value: 'rate1', label: '1' },
@@ -32,18 +43,34 @@ function Push() {
     const dayRatingDefaultOption = dayRatingOptions[0];
 
     const textareaStyle = {
-        width: '99%',
+        backgroundColor: 'rgba(255, 255, 255, 0.80)',
+        border: '1px solid black',
+        width: '80%',
         height: '400px',
         resize: 'none',
         fontSize: '20px',
-        
+        display: 'inline-block',
+        textAlign: 'left'  
     };
 
     const navigate = useNavigate();
     // const version = process.env.REACT_APP_VERSION;
     return (
-        <div>
-            <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white' }}>MyJournal</h1>
+        <div style={{ backgroundImage: `url(${background})`, textAlign: 'center'}}>
+        <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white' }}>MyJournal</h1>
+        <Navbar bg="light" expand="lg">
+        <Container  >
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto" style={{ justifyContent: 'center', textAlign: 'center'}}>
+            <Nav.Link href="push">Write Journal</Nav.Link>
+            <Nav.Link href="pull">Previous Journals</Nav.Link>
+            <Nav.Link href="sharedpull">Shared Journals</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+        </Container>
+        </Navbar>
+            
             <div>
                 <div>
                     <h3 style={{color: 'white'}}>Date</h3>
@@ -76,7 +103,7 @@ function Push() {
             {/* <button onClick={() => navigate('/login', { replace: true })}>
                 <h8>Save Journal Entry</h8>
             </button> */}
-            <Button variant="light">
+            {/* <Button variant="light">
                 <h8 style={{color: 	'#000'}}>Save Journal Entry</h8>
             </Button>
             <Button onClick={() => navigate('/pull', { replace: true })} variant="light">
@@ -84,12 +111,11 @@ function Push() {
             </Button>
             <Button onClick={() => navigate('/sharedpull', { replace: true })} variant="light">
                 <h8 style={{color: 	'#000'}}>Shared Pull Page</h8>
-            </Button>
+            </Button> */}
             {/* <div>
                 <p>Version: {version}</p>
             </div> */}
         </div>
-
     );
 };
 
