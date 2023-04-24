@@ -98,12 +98,10 @@ function Push() {
       </style>
              </Container>
              </Navbar>
-                <div>
-                    
-                </div>
                 <br></br>
                 <br></br>
                 <br></br>
+
                 <h3 style={{color: 'white'}}>What happened today?</h3>
                 <textarea style={textareaStyle}>
 
@@ -111,10 +109,26 @@ function Push() {
 
 
             </div>
+            <br></br>
+            <Navbar expand="lg"  style={{backgroundColor: 'transparent'}}>
+                <Container  >
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mx-auto flex-column">
+                    <Button variant="light">
+                        <h8 style={{color: 	'#000'}}>Save</h8>
+                    </Button>
+                    </Nav>
+                    <Nav className="mx-auto flex-column">
+                    <Button variant="light">
+                        <h8 style={{color: 	'#000'}}>Share</h8>
+                    </Button>
+                     </Nav>
+                </Navbar.Collapse>
+                </Container>
+             </Navbar>
 
-            <Button variant="light">
-                <h8 style={{color: 	'#000'}}>Save Journal Entry</h8>
-            </Button>
+            
             {/* <Button onClick={() => navigate('/pull', { replace: true })} variant="light">
                 <h8 style={{color: 	'#000'}}>Pull Page</h8>
             </Button>
@@ -124,7 +138,6 @@ function Push() {
             {/* <div>
                 <p>Version: {version}</p>
         </div>*/}
-             <br></br>
              <br></br>
              <br></br>
              <br></br>

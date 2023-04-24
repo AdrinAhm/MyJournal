@@ -1,5 +1,5 @@
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "./Auth.css"
 import App from "./App"; 
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,11 @@ export default function (props) {
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin")
   }
+  useEffect(() => {
+    document.body.style.margin = 0;
+    document.body.style.padding = 0;
+    document.body.style.width = '100%';
+  }, []);
 
   const errorLogin = () => {
     var element = document.getElementById("error-label");

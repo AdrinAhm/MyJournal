@@ -1,92 +1,135 @@
-// import React, { useEffect, useState } from 'react'
-// import { Amplify, API, graphqlOperation } from 'aws-amplify'
-// import { createJournals } from './graphql/mutations'
-// import { listJournals } from './graphql/queries'
-// import DatePicker from 'react-datepicker';
+import React, { Component, useState, useEffect } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import "./Push.css";
+import { useNavigate } from "react-router-dom";
+import { Constants } from "@aws-amplify/core";
+import background from "./backgroundimage.jpg";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import Card from 'react-bootstrap/Card';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+// import process from 'process';
 
-// import awsExports from "./aws-exports";
-// Amplify.configure(awsExports);
+function Pull() {
+    const [selectedDate, setSelectedDate] = useState(new Date())
+    const handleDateChange = (date) => {
+        setSelectedDate(date)
+    }
 
-// const initialState = { name: '', description: '' }
+    useEffect(() => {
+        document.body.style.margin = 0;
+        document.body.style.padding = 0;
+        document.body.style.width = '100%';
+      }, []);
 
-// const Pull = () => {
-//   const [formState, setFormState] = useState(initialState)
-//   const [todos, setTodos] = useState([])
+    const [showCard, setShowCard] = useState(false);
 
-//   const [selectedDate, setSelectedDate] = useState(new Date())
-//     const handleDateChange = (date) => {
-//         setSelectedDate(date)
-//     }
+    const handleButtonClick = () => {
+        setShowCard(!showCard);
+    };
 
-//   useEffect(() => {
-//     fetchJournals()
-//   }, [])
+    const textareaStyle = {
+        width: '99%',
+        height: '400px',
+        resize: 'none',
+        fontSize: '20px'
 
-//   function setInput(key, value) {
-//     setFormState({ ...formState, [key]: value })
-//   }
+    
+    };
 
-//   async function fetchJournals() {
-//     try {
-//       const todoData = await API.graphql(graphqlOperation(listJournals))
-//       const todos = todoData.data.listJournals.items
-//       setTodos(todos)
-//     } catch (err) { console.log('error fetching todos') }
-//   }
+    const navigate = useNavigate();
+    // const version = process.env.REACT_APP_VERSION;
+    return (
+        <div style={{ backgroundImage: `url(${background})`, textAlign: 'center' }}>
+        <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white',  fontFamily: 'cursive'}}>MyJournal</h1>
+        
+        <Navbar bg="light" expand="lg">
+        <Container  >
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mx-auto">
+            <Nav.Link href="push" style={{ marginRight: '250px' }}>Write Journal</Nav.Link>
+            <Nav.Link href="pull" style={{ marginRight: '250px' }}>Previous Journals</Nav.Link>
+            <Nav.Link href="sharedpull">Shared Journals</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+        </Container>
+        </Navbar>
+            <div>
+                <div>
+                    <br></br>
+                <Navbar expand="lg"  style={{backgroundColor: 'transparent'}}>
+                <Container  >
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="flex-column">
+                        <h3 style={{color: 'white'}}>Date</h3>
+                        <DatePicker
+                            selected={selectedDate}
+                            onChange={handleDateChange}
+                        />
+                        <Button variant="light" onClick={handleButtonClick}>
+                            {showCard ? 'Grab Journal' : 'Grab Journal'}
+                            {/* <h8 style={{color: 	'#000'}}>Grab Shared Entry</h8> */}
+                        </Button>
+                    </Nav>
+                </Navbar.Collapse>
+                </Container>
+             </Navbar>
+                    
+                </div>
+                {showCard && (
+                            <Card style={{backgroundColor: 'transparent', borderColor: 'transparent'}}>
+                            <Card.Body>
+                                <Card.Title style={{color: 'white'}}>Date: </Card.Title>
+                                <Card.Title style={{color: 'white'}}>Rating: </Card.Title>
+                                <Card.Text style={{color: 'white'}}>Entry: </Card.Text>
+                            </Card.Body>
+                            </Card>
+                )}
+                <br></br>
+            </div>
+            {/* <button onClick={() => navigate('/login', { replace: true })}>
+                <h8>Save Journal Entry</h8>
+            </button> */}
+            
+            {/* <div>
+                <p>Version: {version}</p>
+            </div> */}
+            <br></br>
+            <br></br>
+            <br></br>
+             <br></br>
+             <br></br>
+             <br></br>
+             <br></br> 
+             <br></br>
+             <br></br>
+             <br></br>
+             <br></br>
+             <br></br>
+             <br></br>
+             <br></br>
+             <br></br>
+             <br></br>
+             <br></br>
+             <br></br>
+             <br></br>
+             <br></br>
+             <br></br>
+             
 
-//   async function addJournals() {
-//     try {
-//       if (!formState.name || !formState.description) return
-//       const todo = { ...formState }
-//       setTodos([...todos, todo])
-//       setFormState(initialState)
-//       await API.graphql(graphqlOperation(createJournals, {input: todo}))
-//     } catch (err) {
-//       console.log('error creating todo:', err)
-//     }
-//   }
+        </div>
 
-//   return (
-//     <div style={styles.container}>
-//       <h2>Pull Page</h2>
-//       <input
-//         onChange={event => setInput('name', event.target.value)}
-//         style={styles.input}
-//         value={formState.name}
-//         placeholder="Name"
-//       />
+        
 
-//     <h3>Date</h3>
-//     <DatePicker
-//         selected={selectedDate}
-//         onChange={handleDateChange}
-//     />
-//       <input
-//         onChange={event => setInput('description', event.target.value)}
-//         style={styles.input}
-//         value={formState.description}
-//         placeholder="Description"
-//       />
-//       <button style={styles.button} onClick={addJournals}>Grab Journal</button>
-//       {
-//         todos.map((todo, index) => (
-//           <div key={todo.id ? todo.id : index} style={styles.todo}>
-//             <p style={styles.todoName}>{todo.name}</p>
-//             <p style={styles.todoDescription}>{todo.description}</p>
-//           </div>
-//         ))
-//       }
-//     </div>
-//   )
-// }
+    );
+};
 
-// const styles = {
-//   container: { width: 400, margin: '0 auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 20 },
-//   todo: {  marginBottom: 15 },
-//   input: { border: 'none', backgroundColor: '#ddd', marginBottom: 10, padding: 8, fontSize: 18 },
-//   todoName: { fontSize: 20, fontWeight: 'bold' },
-//   todoDescription: { marginBottom: 0 },
-//   button: { backgroundColor: 'black', color: 'white', outline: 'none', fontSize: 18, padding: '12px 0px' }
-// }
-
-// export default Pull
+export default Pull
