@@ -8,7 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import "./Push.css";
 import { useNavigate } from "react-router-dom";
 import { Constants } from "@aws-amplify/core";
-import background from "./backgroundimage.jpg";
+import background from "./Pictures/backgroundimage.jpg";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';

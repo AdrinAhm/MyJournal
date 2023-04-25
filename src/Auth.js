@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react"
 import "./Auth.css"
 import App from "./App"; 
 import { useNavigate } from 'react-router-dom';
+import background from "./Pictures/loginbackgroundimage.jpg";
+
 
 export default function (props) {
   let [authMode, setAuthMode] = useState("signin")
@@ -26,6 +28,9 @@ export default function (props) {
   if (authMode === "signin") {
 
     return (
+      <div style={{backgroundImage: `url(${background})`}} >
+      {/* <span className="extra-space"></span> */}
+      {/* <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white',  fontFamily: 'cursive'}}>MyJournal</h1> */}
       <div className="Auth-form-container">
         <form className="Auth-form">
           <div className="Auth-form-content">
@@ -57,19 +62,19 @@ export default function (props) {
                 Submit
               </button>
             </div>
-            <p className="text-center mt-2">
-              Forgot <a href="#">password?</a>
-            </p>
             <p id="error-label" className="error-login">
               Username or password is incorrect
             </p>
           </div>
         </form>
       </div>
+      </div>
     )
   }
 
   return (
+    <div style={{backgroundImage: `url(${background})`}} >
+      {/* <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white',  fontFamily: 'cursive'}}>MyJournal</h1> */}
     <div className="Auth-form-container">
       <form className="Auth-form">
         <div className="Auth-form-content">
@@ -111,11 +116,9 @@ export default function (props) {
               Submit
             </button>
           </div>
-          <p className="text-center mt-2">
-            Forgot <a href="#">password?</a>
-          </p>
         </div>
       </form>
+      </div>
     </div>
   )
 }

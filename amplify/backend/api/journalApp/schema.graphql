@@ -7,3 +7,10 @@ type Login @model {
   username: String!
   password: String!
 }
+
+type Journal @model {
+  id: ID!
+  date: String!
+  rate: String!
+  text: String!
+}
