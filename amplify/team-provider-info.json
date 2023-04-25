@@ -22,7 +22,10 @@
         }
       },
       "api": {
-        "journalApp": {}
+        "journalapp": {}
+      },
+      "auth": {
+        "journalapp2a80a0d6": {}
       }
     }
   }

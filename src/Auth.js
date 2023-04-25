@@ -3,26 +3,35 @@ import React, { useState } from "react"
 import "./Auth.css"
 import App from "./App"; 
 import { useNavigate } from 'react-router-dom';
-import * as mutations from './graphql/mutations';
+import {createLogin} from './graphql/mutations';
 import * as queries from './graphql/queries';
-
-const loginDetails = {
-  username,
-  password
-};
-
-const newLogin = await API.graphql({ 
-  query: mutations.createLogin, 
-  variables: { input: loginDetails }
-});
+import  {API} from 'aws-amplify';
 
 export default function (props) {
 
-  const [usernameInput, setUsernameInput, passwordInput, setPasswordInput] = useState('')
+  const newLogin = async (e) => {
+    e.preventDefault()
+    const {target} = e
 
-  const newLogin = (username, password) => {
-    console.log(username)
-    console.log(password)
+    console.log(target.nameInput.value)
+    console.log(target.usernameInput.value)
+    console.log(target.passwordInput.value)
+
+    try{
+      await API.graphql({
+        query: createLogin,
+        variable: {
+          input: {
+            name: target.nameInput.value,
+            username: target.usernameInput.value,
+            password: target.passwordInput.value
+          },
+        },
+      })
+      console.log('Successfully sent')
+    }catch(e){
+      console.log(e)
+    }
   }
 
   let [authMode, setAuthMode] = useState("signin")
@@ -86,7 +95,7 @@ export default function (props) {
 
   return (
     <div className="Auth-form-container">
-      <form className="Auth-form">
+      <form className="Auth-form" onSubmit={newLogin}>
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">Sign Up</h3>
           <div className="text-center">
@@ -101,6 +110,7 @@ export default function (props) {
               type="name"
               className="form-control mt-1"
               placeholder="Full Name"
+              name = "nameInput"
             />
           </div>
           <div className="form-group mt-3">
@@ -109,8 +119,7 @@ export default function (props) {
               type="email"
               className="form-control mt-1"
               placeholder="Email Address"
-              value = {usernameInput}
-              onChange={e => setUsernameInput(e.target.value)}
+              name = "usernameInput"
             />
           </div>
           <div className="form-group mt-3">
@@ -119,15 +128,11 @@ export default function (props) {
               type="password"
               className="form-control mt-1"
               placeholder="Password"
-              value = {passwordInput}
-              onChange={e => setPasswordInput(e.target.value)}
+              name = "passwordInput"
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn-submit" onClick={() =>{
-                newLogin(usernameInput, passwordInput);
-                // navigate('/push');
-            }}>
+            <button type="submit" className="btn-submit">
               Submit
             </button>
           </div>
