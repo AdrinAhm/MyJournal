@@ -1,36 +1,78 @@
 
-import React, { useState } from "react"
+import React, {useEffect, useState } from "react"
 import "./Auth.css"
 import App from "./App"; 
 import { useNavigate } from 'react-router-dom';
 import {createLogin} from './graphql/mutations';
-import * as queries from './graphql/queries';
-import  {API} from 'aws-amplify';
+import {listLogins} from './graphql/queries';
+import  {API, Amplify} from 'aws-amplify';
 
 export default function (props) {
+
+  const login = async (e) => {
+    e.preventDefault()
+    const {target} = e
+
+    const loginData = await API.graphql({
+      query: listLogins,
+      variables: {
+        filter: {
+          username: {
+            eq: target.usernameInput.value
+          }
+        }
+      }
+    })
+
+    if(loginData.data.listLogins.items[0].password == target.passwordInput.value){
+      console.log('Logged In');
+      navigate('./push')
+    }else{
+      console.log('Wrong password')
+      errorLogin()
+    }
+    
+
+    console.log(loginData)
+  }
 
   const newLogin = async (e) => {
     e.preventDefault()
     const {target} = e
 
-    console.log(target.nameInput.value)
-    console.log(target.usernameInput.value)
-    console.log(target.passwordInput.value)
+    const loginData = await API.graphql({
+      query: listLogins,
+      variables: {
+        filter: {
+          username: {
+            eq: target.usernameInput.value
+          }
+        }
+      }
+    })
 
-    try{
-      await API.graphql({
-        query: createLogin,
-        variable: {
-          input: {
-            name: target.nameInput.value,
-            username: target.usernameInput.value,
-            password: target.passwordInput.value
+    const exists = loginData.data.listLogins.items[0] == null
+
+    console.log(exists)
+
+    if(exists == false){
+      console.log('Username already exists')
+    }else{
+      try{
+        await API.graphql({
+          query: createLogin,
+          variables: {
+            input: {
+              name: target.nameInput.value,
+              username: target.usernameInput.value,
+              password: target.passwordInput.value
+            },
           },
-        },
-      })
-      console.log('Successfully sent')
-    }catch(e){
-      console.log(e)
+        })
+        console.log('Successfully sent')
+      }catch(e){
+        console.log(e)
+      }
     }
   }
 
@@ -51,7 +93,7 @@ export default function (props) {
 
     return (
       <div className="Auth-form-container">
-        <form className="Auth-form">
+        <form className="Auth-form" onSubmit={login}>
           <div className="Auth-form-content">
             <h3 className="Auth-form-title">Sign In</h3>
             <div className="text-center">
@@ -66,6 +108,7 @@ export default function (props) {
                 type="email"
                 className="form-control mt-1"
                 placeholder="Enter email"
+                name="usernameInput"
               />
             </div>
             <div className="form-group mt-3">
@@ -74,10 +117,11 @@ export default function (props) {
                 type="password"
                 className="form-control mt-1"
                 placeholder="Enter password"
+                name="passwordInput"
               />
             </div>
             <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn-submit" onClick={errorLogin}>
+              <button type="submit" className="btn-submit">
                 Submit
               </button>
             </div>
