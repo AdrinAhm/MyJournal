@@ -11,17 +11,42 @@ import { Constants } from "@aws-amplify/core";
 import background from "./Pictures/backgroundimage.jpg";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import { Navbar, Modal } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import "./Push.css";
+import "./Pull.css";
+import { FaStar } from "react-icons/fa";
 // import process from 'process';
 
 function Pull() {
-    const [selectedDate, setSelectedDate] = useState(new Date())
+    const [dateValue, setSelectedDate] = useState(new Date())
     const handleDateChange = (date) => {
         setSelectedDate(date)
     }
+    const colors = {
+        orange: "#FFBA5A",
+        grey: "#a9a9a9"
+      };
+
+    const [currentValue, setCurrentValue] = useState(0);
+  const [hoverValue, setHoverValue] = useState(undefined);
+  const stars = Array(5).fill(0)
+    const starsbeautify = {
+        display: "flex",
+        flexDirection: "row",
+      };
+
+      const handleClick = value => {
+        setCurrentValue(value)
+      }
+    
+      const handleMouseOver = newHoverValue => {
+        setHoverValue(newHoverValue)
+      };
+    
+      const handleMouseLeave = () => {
+        setHoverValue(undefined)
+      }
 
     useEffect(() => {
         document.body.style.margin = 0;
@@ -29,63 +54,153 @@ function Pull() {
         document.body.style.width = '100%';
       }, []);
 
+      const [show, setShow] = useState(false);
+  const [inputValue, setInputValue] = useState('');
     const [showCard, setShowCard] = useState(false);
+
+    const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const handleInputChange = (event) => setInputValue(event.target.value);
 
     const handleButtonClick = () => {
         setShowCard(!showCard);
     };
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(`User entered: ${inputValue}`);
+        handleClose();
+      }
+
     const textareaStyle = {
-        width: '99%',
+        backgroundColor: 'rgba(255, 255, 255, 0.80)',
+        border: '1px solid black',
+        width: '80%',
         height: '400px',
         resize: 'none',
-        fontSize: '20px'
-
-    
+        fontSize: '25px',
+        display: 'inline-block',
+        textAlign: 'left',
+        color: 'black'
     };
 
     const navigate = useNavigate();
     // const version = process.env.REACT_APP_VERSION;
     return (
-        <div style={{ backgroundImage: `url(${background})`, textAlign: 'center' }}>
+        <div className="backgroundImage">
         <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white',  fontFamily: 'cursive'}}>MyJournal</h1>
         
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="light" expand="lg" className="mx-auto my-navbar">
         <Container  >
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mx-auto">
-            <Nav.Link href="push" style={{ marginRight: '250px' }}>Write Journal</Nav.Link>
-            <Nav.Link href="pull" style={{ marginRight: '250px' }}>Previous Journals</Nav.Link>
-            <Nav.Link href="sharedpull">Shared Journals</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mx-auto">
+              <Nav.Link className="my-nav-link" href="push" style={{ marginRight: '250px' }}>Write Journal</Nav.Link>
+              <Nav.Link className="my-nav-link" href="pull" style={{ marginRight: '250px' }}>Previous Journals</Nav.Link>
+              <Nav.Link className="my-nav-link" href="sharedpull">Shared Journals</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
         </Container>
-        </Navbar>
-            <div>
-                <div>
-                    <br></br>
-                <Navbar expand="lg"  style={{backgroundColor: 'transparent'}}>
-                <Container  >
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="flex-column">
-                        <h3 style={{color: 'white'}}>Date</h3>
-                        <DatePicker
-                            selected={selectedDate}
-                            onChange={handleDateChange}
+      </Navbar>
+      {/* <form className="Auth-form" onSubmit={newJournal}> */}
+        <div>
+          <br></br>
+
+          <Navbar expand="lg" style={{ backgroundColor: 'transparent' }}>
+            <Container  >
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mx-auto flex-column">
+                  <h3 style={{ color: 'white' }}>Date</h3>
+                  <DatePicker selected={dateValue} onChange={handleDateChange} />
+                </Nav>
+                <Nav className="mx-auto flex-column align-items-center">
+                  <h3 style={{ color: 'white' }}>Rating</h3>
+                  <div style={starsbeautify}>
+                    {stars.map((_, index) => {
+                      return (
+                        <FaStar
+                          // rating={ratingValue}
+                          // onRatingChange={handleRatingChange}
+                          key={index}
+                          size={24}
+                          disabled = {true}
+                        //   onClick={() => handleClick(index + 1)}
+                        //   onMouseOver={() => handleMouseOver(index + 1)}
+                        //   onMouseLeave={handleMouseLeave}
+                          color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
+                          style={{
+                            marginRight: 10,
+                            cursor: "pointer"
+                          }}
                         />
-                        <Button variant="light" onClick={handleButtonClick}>
-                            {showCard ? 'Grab Journal' : 'Grab Journal'}
-                            {/* <h8 style={{color: 	'#000'}}>Grab Shared Entry</h8> */}
-                        </Button>
-                    </Nav>
-                </Navbar.Collapse>
-                </Container>
-             </Navbar>
+                      )
+                    })}
+
+                  </div>
+                  {/* <label for="quantity"></label>
+                          <input type="number" id="quantity" name="quantity" min="1" max="10"></input> */}
+
+                </Nav>
+              </Navbar.Collapse>
+              <style>
+                {`.navbar {
+                      border-top-left-radius: 15px;
+                      border-top-right-radius: 15px;
+                      border-bottom-left-radius: 15px;
+                      border-bottom-right-radius: 15px;
+                      }`}
+              </style>
+            </Container>
+          </Navbar>
+          <br></br>
+          <br></br>
+          <br></br>
+          <h3 style={{ color: 'white' }}>Previous Journal</h3>
+          {/* <textarea value={journalValue} onChange={handleJournalChange} style={textareaStyle} ref={textareaRef} onKeyDown={handleKeyDown}>
+
+          </textarea> */}
+          <textarea disabled style={textareaStyle} placeholder="Select date for journal to show up here">
+          </textarea>
+
+          <Navbar expand="lg" style={{ backgroundColor: 'transparent' }}>
+          <Container>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav" className="d-flex justify-content-center">
+              <Nav className="mx-2">
+                <Button type="submit" variant="light" onClick={handleShow}>
+                  <h8 style={{ color: '#000' }}>Share</h8>
+                </Button>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Share</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group>
+                <Form.Label>Enter Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Username"
+                  value={inputValue}
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleSubmit}>
+              Share
+            </Button>
+          </Modal.Footer>
+        </Modal>
                     
                 </div>
-                {showCard && (
+                {/* {showCard && (
                             <Card style={{backgroundColor: 'transparent', borderColor: 'white', width: '80%',}}>
                             <Card.Body>
                                 <Card.Title style={{color: 'white'}}>Date: </Card.Title>
@@ -94,8 +209,7 @@ function Pull() {
                             </Card.Body>
                             </Card>
                 )}
-                <br></br>
-            </div>
+                <br></br> */}
             {/* <button onClick={() => navigate('/login', { replace: true })}>
                 <h8>Save Journal Entry</h8>
             </button> */}
@@ -106,24 +220,6 @@ function Pull() {
             <br></br>
             <br></br>
             <br></br>
-             <br></br>
-             <br></br>
-             <br></br>
-             <br></br> 
-             <br></br>
-             <br></br>
-             <br></br>
-             <br></br>
-             <br></br>
-             <br></br>
-             <br></br>
-             <br></br>
-             <br></br>
-             <br></br>
-             <br></br>
-             <br></br>
-             <br></br>
-             <br></br>
              
 
         </div>
