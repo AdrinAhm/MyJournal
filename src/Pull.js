@@ -1,90 +1,231 @@
-// import React, { useEffect, useState } from 'react'
-// import { Amplify, API, graphqlOperation } from 'aws-amplify'
-// import DatePicker from 'react-datepicker';
+import React, { Component, useState, useEffect } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import "./Push.css";
+import { useNavigate } from "react-router-dom";
+import { Constants } from "@aws-amplify/core";
+import background from "./Pictures/backgroundimage.jpg";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import { Navbar, Modal } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import "./Pull.css";
+import { FaStar } from "react-icons/fa";
+// import process from 'process';
 
-// import awsExports from "./aws-exports";
-// Amplify.configure(awsExports);
+function Pull() {
+    const [dateValue, setSelectedDate] = useState(new Date())
+    const handleDateChange = (date) => {
+        setSelectedDate(date)
+    }
+    const colors = {
+        orange: "#FFBA5A",
+        grey: "#a9a9a9"
+      };
 
-// const initialState = { name: '', description: '' }
+    const [currentValue, setCurrentValue] = useState(0);
+  const [hoverValue, setHoverValue] = useState(undefined);
+  const stars = Array(5).fill(0)
+    const starsbeautify = {
+        display: "flex",
+        flexDirection: "row",
+      };
 
-// const Pull = () => {
-//   const [formState, setFormState] = useState(initialState)
-//   const [todos, setTodos] = useState([])
+      const handleClick = value => {
+        setCurrentValue(value)
+      }
+    
+      const handleMouseOver = newHoverValue => {
+        setHoverValue(newHoverValue)
+      };
+    
+      const handleMouseLeave = () => {
+        setHoverValue(undefined)
+      }
 
-//   const [selectedDate, setSelectedDate] = useState(new Date())
-//     const handleDateChange = (date) => {
-//         setSelectedDate(date)
-//     }
+    useEffect(() => {
+        document.body.style.margin = 0;
+        document.body.style.padding = 0;
+        document.body.style.width = '100%';
+      }, []);
 
-//   useEffect(() => {
-//     fetchJournals()
-//   }, [])
+      const [show, setShow] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+    const [showCard, setShowCard] = useState(false);
 
-//   function setInput(key, value) {
-//     setFormState({ ...formState, [key]: value })
-//   }
+    const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const handleInputChange = (event) => setInputValue(event.target.value);
 
-//   async function fetchJournals() {
-//     try {
-//       const todoData = await API.graphql(graphqlOperation(listJournals))
-//       const todos = todoData.data.listJournals.items
-//       setTodos(todos)
-//     } catch (err) { console.log('error fetching todos') }
-//   }
+    const handleButtonClick = () => {
+        setShowCard(!showCard);
+    };
 
-//   async function addJournals() {
-//     try {
-//       if (!formState.name || !formState.description) return
-//       const todo = { ...formState }
-//       setTodos([...todos, todo])
-//       setFormState(initialState)
-//       await API.graphql(graphqlOperation(createJournals, {input: todo}))
-//     } catch (err) {
-//       console.log('error creating todo:', err)
-//     }
-//   }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(`User entered: ${inputValue}`);
+        handleClose();
+      }
 
-//   return (
-//     <div style={styles.container}>
-//       <h2>Pull Page</h2>
-//       <input
-//         onChange={event => setInput('name', event.target.value)}
-//         style={styles.input}
-//         value={formState.name}
-//         placeholder="Name"
-//       />
+    const textareaStyle = {
+        backgroundColor: 'rgba(255, 255, 255, 0.80)',
+        border: '1px solid black',
+        width: '80%',
+        height: '400px',
+        resize: 'none',
+        fontSize: '25px',
+        display: 'inline-block',
+        textAlign: 'left',
+        color: 'black'
+    };
 
-//     <h3>Date</h3>
-//     <DatePicker
-//         selected={selectedDate}
-//         onChange={handleDateChange}
-//     />
-//       <input
-//         onChange={event => setInput('description', event.target.value)}
-//         style={styles.input}
-//         value={formState.description}
-//         placeholder="Description"
-//       />
-//       <button style={styles.button} onClick={addJournals}>Grab Journal</button>
-//       {
-//         todos.map((todo, index) => (
-//           <div key={todo.id ? todo.id : index} style={styles.todo}>
-//             <p style={styles.todoName}>{todo.name}</p>
-//             <p style={styles.todoDescription}>{todo.description}</p>
-//           </div>
-//         ))
-//       }
-//     </div>
-//   )
-// }
+    const navigate = useNavigate();
+    // const version = process.env.REACT_APP_VERSION;
+    return (
+        <div className="backgroundImage">
+        <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white',  fontFamily: 'cursive'}}>MyJournal</h1>
+        
+        <Navbar bg="light" expand="lg" className="mx-auto my-navbar">
+        <Container  >
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mx-auto">
+              <Nav.Link className="my-nav-link" href="push" style={{ marginRight: '250px' }}>Write Journal</Nav.Link>
+              <Nav.Link className="my-nav-link" href="pull" style={{ marginRight: '250px' }}>Previous Journals</Nav.Link>
+              <Nav.Link className="my-nav-link" href="sharedpull">Shared Journals</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      {/* <form className="Auth-form" onSubmit={newJournal}> */}
+        <div>
+          <br></br>
 
-// const styles = {
-//   container: { width: 400, margin: '0 auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 20 },
-//   todo: {  marginBottom: 15 },
-//   input: { border: 'none', backgroundColor: '#ddd', marginBottom: 10, padding: 8, fontSize: 18 },
-//   todoName: { fontSize: 20, fontWeight: 'bold' },
-//   todoDescription: { marginBottom: 0 },
-//   button: { backgroundColor: 'black', color: 'white', outline: 'none', fontSize: 18, padding: '12px 0px' }
-// }
+          <Navbar expand="lg" style={{ backgroundColor: 'transparent' }}>
+            <Container  >
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mx-auto flex-column">
+                  <h3 style={{ color: 'white' }}>Date</h3>
+                  <DatePicker selected={dateValue} onChange={handleDateChange} />
+                </Nav>
+                <Nav className="mx-auto flex-column align-items-center">
+                  <h3 style={{ color: 'white' }}>Rating</h3>
+                  <div style={starsbeautify}>
+                    {stars.map((_, index) => {
+                      return (
+                        <FaStar
+                          // rating={ratingValue}
+                          // onRatingChange={handleRatingChange}
+                          key={index}
+                          size={24}
+                          disabled = {true}
+                        //   onClick={() => handleClick(index + 1)}
+                        //   onMouseOver={() => handleMouseOver(index + 1)}
+                        //   onMouseLeave={handleMouseLeave}
+                          color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
+                          style={{
+                            marginRight: 10,
+                            cursor: "pointer"
+                          }}
+                        />
+                      )
+                    })}
 
-// export default Pull
+                  </div>
+                  {/* <label for="quantity"></label>
+                          <input type="number" id="quantity" name="quantity" min="1" max="10"></input> */}
+
+                </Nav>
+              </Navbar.Collapse>
+              <style>
+                {`.navbar {
+                      border-top-left-radius: 15px;
+                      border-top-right-radius: 15px;
+                      border-bottom-left-radius: 15px;
+                      border-bottom-right-radius: 15px;
+                      }`}
+              </style>
+            </Container>
+          </Navbar>
+          <br></br>
+          <br></br>
+          <br></br>
+          <h3 style={{ color: 'white' }}>Previous Journal</h3>
+          {/* <textarea value={journalValue} onChange={handleJournalChange} style={textareaStyle} ref={textareaRef} onKeyDown={handleKeyDown}>
+          </textarea> */}
+          <textarea disabled style={textareaStyle} placeholder="Select date for journal to show up here">
+          </textarea>
+
+          <Navbar expand="lg" style={{ backgroundColor: 'transparent' }}>
+          <Container>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav" className="d-flex justify-content-center">
+              <Nav className="mx-2">
+                <Button type="submit" variant="light" onClick={handleShow}>
+                  <h8 style={{ color: '#000' }}>Share</h8>
+                </Button>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Share</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group>
+                <Form.Label>Enter Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Username"
+                  value={inputValue}
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleSubmit}>
+              Share
+            </Button>
+          </Modal.Footer>
+        </Modal>
+                    
+                </div>
+                {/* {showCard && (
+                            <Card style={{backgroundColor: 'transparent', borderColor: 'white', width: '80%',}}>
+                            <Card.Body>
+                                <Card.Title style={{color: 'white'}}>Date: </Card.Title>
+                                <Card.Title style={{color: 'white'}}>Rating: </Card.Title>
+                                <Card.Text style={{color: 'white'}}>Entry: </Card.Text>
+                            </Card.Body>
+                            </Card>
+                )}
+                <br></br> */}
+            {/* <button onClick={() => navigate('/login', { replace: true })}>
+                <h8>Save Journal Entry</h8>
+            </button> */}
+            
+            {/* <div>
+                <p>Version: {version}</p>
+            </div> */}
+            <br></br>
+            <br></br>
+            <br></br>
+             
+
+        </div>
+
+        
+
+    );
+};
+
+export default Pull

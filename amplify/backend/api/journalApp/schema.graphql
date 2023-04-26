@@ -16,6 +16,7 @@ type Journal @model  @aws_api_key{
   rate: Int!
   text: String!
   share: Boolean!
+  ownerShared: String
 }
 
 type Setting @model  @aws_api_key{

@@ -7,7 +7,9 @@
           "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 7
+              "apiKeyExpirationDate": "2023-05-03T22:38:00.606Z",
+              "apiKeyExpirationDays": 7,
+              "description": "new key"
             },
             "authenticationType": "API_KEY"
           }
@@ -76,6 +78,14 @@
         }
       ]
     },
+    "AMPLIFY_storage_journals_streamArn": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "journals"
+        }
+      ]
+    },
     "AMPLIFY_storage_journals_tableName": {
       "usedBy": [
         {
@@ -86,6 +96,12 @@
     }
   },
   "storage": {
+    "Loginfex63dj735cdtkg7gbwh4z466idev": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB",
+      "serviceType": "imported"
+    },
     "journals": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",

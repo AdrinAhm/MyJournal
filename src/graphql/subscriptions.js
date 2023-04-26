@@ -10,6 +10,9 @@ export const onCreateLogin = /* GraphQL */ `
       password
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -22,6 +25,9 @@ export const onUpdateLogin = /* GraphQL */ `
       password
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -34,6 +40,9 @@ export const onDeleteLogin = /* GraphQL */ `
       password
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -46,8 +55,12 @@ export const onCreateJournal = /* GraphQL */ `
       rate
       text
       share
+      ownerShared
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -60,8 +73,12 @@ export const onUpdateJournal = /* GraphQL */ `
       rate
       text
       share
+      ownerShared
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -74,8 +91,12 @@ export const onDeleteJournal = /* GraphQL */ `
       rate
       text
       share
+      ownerShared
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -86,6 +107,9 @@ export const onCreateSetting = /* GraphQL */ `
       background
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -96,6 +120,9 @@ export const onUpdateSetting = /* GraphQL */ `
       background
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -106,6 +133,9 @@ export const onDeleteSetting = /* GraphQL */ `
       background
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;

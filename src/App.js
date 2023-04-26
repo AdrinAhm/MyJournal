@@ -23,7 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Auth />} />
         <Route path="push" element={<Push/>}/>
-        {/* <Route path="pull" element={<Pull/>}/> */}
+        <Route path="pull" element={<Pull/>}/>
         <Route path="sharedpull" element={<SharedPull/>}/>
       </Routes>
     </BrowserRouter>
