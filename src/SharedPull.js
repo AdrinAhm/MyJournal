@@ -156,28 +156,67 @@ function SharedPull() {
             </Navbar.Collapse>
           </Container>
         </Navbar> */}
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Share</Modal.Title>
+        <Modal show={show} onHide={handleClose} className="my-modal-lg">
+          <Modal.Header closeButton className="transparent-modal-body">
+            <Modal.Title>Shared</Modal.Title> {/*Maybe add from username?????*/}
           </Modal.Header>
-          <Modal.Body>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group>
-                <Form.Label>Enter Username</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Username"
-                  value={inputValue}
-                  onChange={handleInputChange}
-                />
-              </Form.Group>
-            </Form>
+          <Modal.Body className="transparent-modal-body">
+          <Navbar expand="lg" style={{ backgroundColor: 'transparent' }}>
+            <Container  >
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mx-auto flex-column align-items-center">
+                  <h3 style={{ color: 'Black' }}>Date</h3>
+                  <DatePicker disabled={true} selected={dateValue} onChange={handleDateChange} />
+                </Nav>
+                <Nav className="mx-auto flex-column align-items-center">
+                  <h3 style={{ color: 'Black' }}>Rating</h3>
+                  <div style={starsbeautify}>
+                    {stars.map((_, index) => {
+                      return (
+                        <FaStar
+                          // rating={ratingValue}
+                          // onRatingChange={handleRatingChange}
+                          key={index}
+                          size={24}
+                          disabled = {true}
+                        //   onClick={() => handleClick(index + 1)}
+                        //   onMouseOver={() => handleMouseOver(index + 1)}
+                        //   onMouseLeave={handleMouseLeave}
+                          color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
+                          style={{
+                            marginRight: 10,
+                            cursor: "pointer"
+                          }}
+                        />
+                      )
+                    })}
+
+                  </div>
+                  {/* <label for="quantity"></label>
+                          <input type="number" id="quantity" name="quantity" min="1" max="10"></input> */}
+
+                </Nav>
+              </Navbar.Collapse>
+              <style>
+                {`.navbar {
+                      border-top-left-radius: 15px;
+                      border-top-right-radius: 15px;
+                      border-bottom-left-radius: 15px;
+                      border-bottom-right-radius: 15px;
+                      }`}
+              </style>
+            </Container>
+          </Navbar>
+          <Modal.Body className="centered-modal-body">
+          <h3 style={{ color: 'black' }}>Previous Journal</h3>
           </Modal.Body>
-          <Modal.Footer>
-            <Button variant="primary" onClick={handleSubmit}>
-              Share
-            </Button>
-          </Modal.Footer>
+                <Modal.Body className="centered-modal-body">
+                {/* <h3 style={{ color: 'black' }}>Previous Journal</h3> */}
+                <textarea disabled style={textareaStyle} placeholder="Select date for journal to show up here">
+                </textarea>
+                </Modal.Body>
+          </Modal.Body>
         </Modal>
                     
                 </div>

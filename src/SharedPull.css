@@ -59,6 +59,33 @@
         color : white
       }
 
+      .centered-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .my-modal-lg .modal-dialog {
+        max-width: 90%;
+        /* background-image: url('./Pictures/sharedpullbackgroundimage.jpg');
+        background-repeat: no-repeat;
+        background-size: cover; */
+      }
+
+      .centered-modal-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+
+      .transparent-modal-body {
+        background-color: "black";
+        opacity: 0.8;
+      }
+      
+      
+
   }
   
   
