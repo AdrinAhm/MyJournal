@@ -1,7 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -17,6 +16,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import "./SharedPull.css";
 import { FaStar } from "react-icons/fa";
 import { AiOutlineMail } from 'react-icons/ai';
+import { BsFillGearFill } from 'react-icons/bs';
+import { Dropdown } from 'react-bootstrap';
 // import process from 'process';
 
 function SharedPull() {
@@ -84,14 +85,37 @@ function SharedPull() {
         textAlign: 'left',
         color: 'black'
     };
+    const handleLogout = () => {
+      // handle logout logic here
+    };
 
     const navigate = useNavigate();
     // const version = process.env.REACT_APP_VERSION;
     return (
         <div className="backgroundImage">
-        <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white',  fontFamily: 'cursive'}}>MyJournal</h1>
-        
-        <Navbar bg="light" expand="lg" className="mx-auto my-navbar">
+        <Navbar expand="lg" className="mx-auto" style={{ backgroundColor: 'transparent' }}>
+        <Container>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mx-auto">
+              <Nav.Link style={{ backgroundColor: 'transparent', marginRight: '100px' }}></Nav.Link>
+              <Nav.Link style={{ backgroundColor: 'transparent', marginRight: '100px' }}></Nav.Link>
+              <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white', fontFamily: 'cursive', marginLeft: '300px' }}>MyJournal</h1>
+              <Dropdown style={{marginLeft: '400px'}}>
+                <Dropdown.Toggle variant="link" id="settings-dropdown" style={{ fontSize: '1.5rem', padding: '1rem', color: 'white'  }}>
+                  <BsFillGearFill />
+                </Dropdown.Toggle>
+                <Dropdown.Menu style={{ fontSize: '1rem', padding: '0.2rem', width: '50px', maxHeight: '200px' }} >
+                  <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              
+              
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <Navbar bg="light" expand="lg" className="mx-auto my-navbar">
         <Container  >
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

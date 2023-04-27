@@ -1,7 +1,6 @@
 import React, { Component, useState, useEffect, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -13,6 +12,8 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import { Navbar, Modal } from 'react-bootstrap';
 import { FaStar } from "react-icons/fa";
+import { BsFillGearFill } from 'react-icons/bs';
+import { Dropdown } from 'react-bootstrap';
 // import { createJournal } from './graphql/mutations';
 
 
@@ -30,7 +31,7 @@ function Push() {
   // const handleOwnerChange = (event) => {
   //   setOwnerValue(event.target.value); //Adrin's value
   // };
-  const dateValueISO = dateValue.toISOString();
+  const dateValueISO = dateValue.toISOString().slice(0, 10)
 
   const handleDateChange = (date) => {
     setDateValue(date);
@@ -167,10 +168,42 @@ function Push() {
 
   const navigate = useNavigate();
   // const version = process.env.REACT_APP_VERSION;
+
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  const handleLogout = () => {
+    // handle logout logic here
+  };
+
   return (
     <div className="backgroundImage">
-      <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white', fontFamily: 'cursive' }}>MyJournal</h1>
-
+      <Navbar expand="lg" className="mx-auto" style={{ backgroundColor: 'transparent' }}>
+        <Container>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mx-auto">
+              <Nav.Link style={{ backgroundColor: 'transparent', marginRight: '100px' }}></Nav.Link>
+              <Nav.Link style={{ backgroundColor: 'transparent', marginRight: '100px' }}></Nav.Link>
+              <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white', fontFamily: 'cursive', marginLeft: '300px' }}>MyJournal</h1>
+              <Dropdown style={{marginLeft: '400px'}}>
+                <Dropdown.Toggle variant="link" id="settings-dropdown" style={{ fontSize: '1.5rem', padding: '1rem', color: 'white'  }}>
+                  <BsFillGearFill />
+                </Dropdown.Toggle>
+                <Dropdown.Menu style={{ fontSize: '1rem', padding: '0.2rem', width: '50px', maxHeight: '200px' }} >
+                  <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              
+              
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      
       <Navbar bg="light" expand="lg" className="mx-auto my-navbar">
         <Container  >
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -194,8 +227,10 @@ function Push() {
                 <Nav className="mx-auto flex-column">
                   <h3 style={{ color: 'white' }}>Date</h3>
                   <DatePicker 
+                    dateFormat="yyyy-MM-dd"
                     selected={dateValue} 
-                    onChange={handleDateChange} />
+                    onChange={handleDateChange}
+                     />
 
                 </Nav>
                 <Nav className="mx-auto flex-column align-items-center">
