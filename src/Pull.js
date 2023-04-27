@@ -109,6 +109,7 @@ function Pull() {
                   <BsFillGearFill />
                 </Dropdown.Toggle>
                 <Dropdown.Menu style={{ fontSize: '1rem', padding: '0.2rem', width: '50px', maxHeight: '200px' }} >
+                  <Dropdown.Item disabled={true} >Username</Dropdown.Item>
                   <Dropdown.Item onClick={() => navigate('/', { replace: true })}>Log out</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
