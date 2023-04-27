@@ -158,17 +158,17 @@ function SharedPull() {
                 <Nav className="mx-auto">
                 <div class="mail-button-container">
                   <label style={{color: "white", fontSize: "20px"}} for="mail-button">Username</label>
-                  <Button onClick={handleShow} className="mail-button">
+                  <li onClick={handleShow} className="mail-button">
                       <AiOutlineMail />
-                  </Button>
+                  </li>
                 </div>
                 </Nav>
                 <Nav className="mx-auto">
                 <div class="mail-button-container">
                   <label style={{color: "white", fontSize: "20px"}} for="mail-button">Username</label>
-                  <Button onClick={handleShow} className="mail-button">
+                  <li onClick={handleShow} className="mail-button">
                       <AiOutlineMail />
-                  </Button>
+                  </li>
                 </div>
                 </Nav>
               </Navbar.Collapse>
