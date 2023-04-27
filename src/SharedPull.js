@@ -85,9 +85,6 @@ function SharedPull() {
         textAlign: 'left',
         color: 'black'
     };
-    const handleLogout = () => {
-      // handle logout logic here
-    };
 
     const navigate = useNavigate();
     // const version = process.env.REACT_APP_VERSION;
@@ -106,7 +103,7 @@ function SharedPull() {
                   <BsFillGearFill />
                 </Dropdown.Toggle>
                 <Dropdown.Menu style={{ fontSize: '1rem', padding: '0.2rem', width: '50px', maxHeight: '200px' }} >
-                  <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
+                  <Dropdown.Item onClick={() => navigate('/', { replace: true })}>Log out</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
               
@@ -154,12 +151,30 @@ function SharedPull() {
           <br></br>
           <br></br>
           <br></br>
-          <div class="mail-button-container">
-            <label style={{color: "white", fontSize: "20px"}} for="mail-button">Username</label>
-            <Button onClick={handleShow} className="mail-button">
-                <AiOutlineMail />
-            </Button>
-          </div>
+          <Navbar expand="lg" style={{ backgroundColor: 'transparent' }}>
+            <Container  >
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mx-auto">
+                <div class="mail-button-container">
+                  <label style={{color: "white", fontSize: "20px"}} for="mail-button">Username</label>
+                  <Button onClick={handleShow} className="mail-button">
+                      <AiOutlineMail />
+                  </Button>
+                </div>
+                </Nav>
+                <Nav className="mx-auto">
+                <div class="mail-button-container">
+                  <label style={{color: "white", fontSize: "20px"}} for="mail-button">Username</label>
+                  <Button onClick={handleShow} className="mail-button">
+                      <AiOutlineMail />
+                  </Button>
+                </div>
+                </Nav>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
+          
 
           {/* <h3 style={{ color: 'white' }}>Previous Journal</h3>
           <textarea value={journalValue} onChange={handleJournalChange} style={textareaStyle} ref={textareaRef} onKeyDown={handleKeyDown}>

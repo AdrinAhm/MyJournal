@@ -20,7 +20,7 @@ import { Dropdown } from 'react-bootstrap';
 // import { Text, Grid } from "@nextui-org/react";
 // import process from 'process';
 
-function Push() {
+function Push(variable) {
   //database values
   // const [ownerValue, setOwnerValue] = useState("");
   const [dateValue, setDateValue] = useState(new Date());
@@ -175,9 +175,6 @@ function Push() {
     setShowDropdown(!showDropdown);
   };
 
-  const handleLogout = () => {
-    // handle logout logic here
-  };
 
   return (
     <div className="backgroundImage">
@@ -193,12 +190,10 @@ function Push() {
                 <Dropdown.Toggle variant="link" id="settings-dropdown" style={{ fontSize: '1.5rem', padding: '1rem', color: 'white'  }}>
                   <BsFillGearFill />
                 </Dropdown.Toggle>
-                <Dropdown.Menu style={{ fontSize: '1rem', padding: '0.2rem', width: '50px', maxHeight: '200px' }} >
-                  <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
+                <Dropdown.Menu  style={{ fontSize: '1rem', padding: '0.2rem', width: '50px', maxHeight: '200px' }} >
+                  <Dropdown.Item onClick={() => navigate('/', { replace: true })}>Log out</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-              
-              
             </Nav>
           </Navbar.Collapse>
         </Container>

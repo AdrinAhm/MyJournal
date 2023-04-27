@@ -85,9 +85,6 @@ function Pull() {
         color: 'black'
     };
 
-    const handleLogout = () => {
-      // handle logout logic here
-    };
 
     const navigate = useNavigate();
     // const version = process.env.REACT_APP_VERSION;
@@ -106,7 +103,7 @@ function Pull() {
                   <BsFillGearFill />
                 </Dropdown.Toggle>
                 <Dropdown.Menu style={{ fontSize: '1rem', padding: '0.2rem', width: '50px', maxHeight: '200px' }} >
-                  <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
+                  <Dropdown.Item onClick={() => navigate('/', { replace: true })}>Log out</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
               

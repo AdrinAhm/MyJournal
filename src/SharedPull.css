@@ -48,15 +48,15 @@
       
       .mail-button-container label {
         display: block;
-        margin-bottom: 10px;
+        margin-bottom: 7px;
       }
       
       .mail-button {
         border: none;
-        background-color: rgb(37, 37, 180);
+        background-color: rgb(255, 255, 255);
         cursor: pointer;
         font-size: 75px;
-        color : white
+        color : green
       }
 
       .centered-container {
