@@ -29,6 +29,12 @@ function Pull() {
         grey: "#a9a9a9"
       };
 
+      const errorShare = () => {
+        var element = document.getElementById("error-label");
+        // element.style.visibility = element.style.visibility === "visible" ? "hidden" : "visible"
+        element.style.visibility = "visible"
+      }
+
     const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
   const stars = Array(5).fill(0)
@@ -218,6 +224,9 @@ function Pull() {
             <Button variant="primary" onClick={handleSubmit}>
               Share
             </Button>
+            <p id="error-label" className="error-share">
+              Username or password is incorrect
+            </p>
           </Modal.Footer>
         </Modal>
                     

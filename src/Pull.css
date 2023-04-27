@@ -20,6 +20,12 @@
       background-image: url('./Pictures/backgroundimage.jpg');
       text-align: center;
     }
+
+    .error-share{
+      text-align: center;
+      color: rgb(255, 0, 0);
+      visibility: hidden;
+    }
   
     .my-nav-link {
       font-size: 20px;
