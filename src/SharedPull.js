@@ -1,7 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -17,19 +16,58 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import "./SharedPull.css";
 import { FaStar } from "react-icons/fa";
 import { AiOutlineMail } from 'react-icons/ai';
+import { BsFillGearFill } from 'react-icons/bs';
+import { Dropdown } from 'react-bootstrap';
+import  {API} from 'aws-amplify';
+import {listJournals} from './graphql/queries';
 // import process from 'process';
 
 function SharedPull() {
+  const [sharedJournals, setSharedJournals] = useState([])
+  const [journalValue, setJournalValue] = useState("Select date for journal to show up here");
+  const [currentValue, setCurrentValue] = useState(0);
+  const [userValue, setUserValue] = useState("Username")
     const [dateValue, setSelectedDate] = useState(new Date())
     const handleDateChange = (date) => {
         setSelectedDate(date)
+        pullJournal(date.toISOString().slice(0,10))
+    }
+
+    const pullJournal = async (dateInput)=> {
+      try{
+        const journalData = await API.graphql({
+          query: listJournals,
+          variables: {
+            filter: {
+              owner:{
+                eq: localStorage.getItem('id')
+              },
+              date: {
+                eq: dateInput
+              },
+              share: {
+                eq: true
+              }
+            }
+          }
+        })
+
+        console.log(journalData.data.listJournals.items)
+
+        setSharedJournals(journalData.data.listJournals.items)
+
+        //We have to list the documents
+  
+      }catch(e){
+        console.log(e)
+      }
     }
     const colors = {
         orange: "#FFBA5A",
         grey: "#a9a9a9"
       };
 
-    const [currentValue, setCurrentValue] = useState(0);
+    
   const [hoverValue, setHoverValue] = useState(undefined);
   const stars = Array(5).fill(0)
     const starsbeautify = {
@@ -53,14 +91,24 @@ function SharedPull() {
         document.body.style.margin = 0;
         document.body.style.padding = 0;
         document.body.style.width = '100%';
+        setUserValue(localStorage.getItem('username'))
       }, []);
 
-      const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
   const [inputValue, setInputValue] = useState('');
-    const [showCard, setShowCard] = useState(false);
+  const [showCard, setShowCard] = useState(false);
 
-    const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+
+  const handleShow = (event, index) => {
+    console.log(sharedJournals[index].text)
+    setJournalValue(sharedJournals[index].text)
+    setCurrentValue(sharedJournals[index].rate)
+
+    setShow(true);
+  }
+    
+    
   const handleInputChange = (event) => setInputValue(event.target.value);
 
     const handleButtonClick = () => {
@@ -84,14 +132,38 @@ function SharedPull() {
         textAlign: 'left',
         color: 'black'
     };
+    const handleLogout = () => {
+      // handle logout logic here
+    };
 
     const navigate = useNavigate();
     // const version = process.env.REACT_APP_VERSION;
     return (
         <div className="backgroundImage">
-        <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white',  fontFamily: 'cursive'}}>MyJournal</h1>
-        
-        <Navbar bg="light" expand="lg" className="mx-auto my-navbar">
+        <Navbar expand="lg" className="mx-auto" style={{ backgroundColor: 'transparent' }}>
+        <Container>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mx-auto">
+              <Nav.Link style={{ backgroundColor: 'transparent', marginRight: '100px' }}></Nav.Link>
+              <Nav.Link style={{ backgroundColor: 'transparent', marginRight: '100px' }}></Nav.Link>
+              <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white', fontFamily: 'cursive', marginLeft: '300px' }}>MyJournal</h1>
+              <Dropdown style={{marginLeft: '400px'}}>
+                <Dropdown.Toggle variant="link" id="settings-dropdown" style={{ fontSize: '1.5rem', padding: '1rem', color: 'white'  }}>
+                  <BsFillGearFill />
+                </Dropdown.Toggle>
+                <Dropdown.Menu style={{ fontSize: '1rem', padding: '0.2rem', width: '50px', maxHeight: '200px' }} >
+                  <Dropdown.Item disabled={true} >{userValue}</Dropdown.Item>
+                  <Dropdown.Item onClick={() => navigate('/', { replace: true })}>Logout</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              
+              
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <Navbar bg="light" expand="lg" className="mx-auto my-navbar">
         <Container  >
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -130,12 +202,28 @@ function SharedPull() {
           <br></br>
           <br></br>
           <br></br>
-          <div class="mail-button-container">
-            <label style={{color: "white", fontSize: "20px"}} for="mail-button">Username</label>
-            <Button onClick={handleShow} className="mail-button">
-                <AiOutlineMail />
-            </Button>
-          </div>
+
+
+          <Navbar expand="lg" style={{ backgroundColor: 'transparent' }}>
+            <Container>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+
+                {sharedJournals.map((sharedJournal, index) => (
+                  <Nav className="mx-auto">
+                  <div class="mail-button-container">
+                    <label style={{color: "white", fontSize: "20px"}} for="mail-button">{sharedJournal.ownerShared}</label>
+                     <li key = {index} onClick={event => handleShow(event, index)} className="mail-button">
+                         <AiOutlineMail />
+                     </li>
+                   </div>
+                   </Nav>
+                ))}
+
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
+          
 
           {/* <h3 style={{ color: 'white' }}>Previous Journal</h3>
           <textarea value={journalValue} onChange={handleJournalChange} style={textareaStyle} ref={textareaRef} onKeyDown={handleKeyDown}>
@@ -155,28 +243,67 @@ function SharedPull() {
             </Navbar.Collapse>
           </Container>
         </Navbar> */}
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Share</Modal.Title>
+        <Modal show={show} onHide={handleClose} className="my-modal-lg">
+          <Modal.Header closeButton className="transparent-modal-body">
+            <Modal.Title>Shared</Modal.Title> {/*Maybe add from username?????*/}
           </Modal.Header>
-          <Modal.Body>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group>
-                <Form.Label>Enter Username</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Username"
-                  value={inputValue}
-                  onChange={handleInputChange}
-                />
-              </Form.Group>
-            </Form>
+          <Modal.Body className="transparent-modal-body">
+          <Navbar expand="lg" style={{ backgroundColor: 'transparent' }}>
+            <Container  >
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mx-auto flex-column align-items-center">
+                  <h3 style={{ color: 'Black' }}>Date</h3>
+                  <DatePicker disabled={true} selected={dateValue} onChange={handleDateChange} />
+                </Nav>
+                <Nav className="mx-auto flex-column align-items-center">
+                  <h3 style={{ color: 'Black' }}>Rating</h3>
+                  <div style={starsbeautify}>
+                    {stars.map((_, index) => {
+                      return (
+                        <FaStar
+                          // rating={ratingValue}
+                          // onRatingChange={handleRatingChange}
+                          key={index}
+                          size={24}
+                          disabled = {true}
+                        //   onClick={() => handleClick(index + 1)}
+                        //   onMouseOver={() => handleMouseOver(index + 1)}
+                        //   onMouseLeave={handleMouseLeave}
+                          color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
+                          style={{
+                            marginRight: 10,
+                            cursor: "pointer"
+                          }}
+                        />
+                      )
+                    })}
+
+                  </div>
+                  {/* <label for="quantity"></label>
+                          <input type="number" id="quantity" name="quantity" min="1" max="10"></input> */}
+
+                </Nav>
+              </Navbar.Collapse>
+              <style>
+                {`.navbar {
+                      border-top-left-radius: 15px;
+                      border-top-right-radius: 15px;
+                      border-bottom-left-radius: 15px;
+                      border-bottom-right-radius: 15px;
+                      }`}
+              </style>
+            </Container>
+          </Navbar>
+          <Modal.Body className="centered-modal-body">
+          <h3 style={{ color: 'black' }}>Previous Journal</h3>
           </Modal.Body>
-          <Modal.Footer>
-            <Button variant="primary" onClick={handleSubmit}>
-              Share
-            </Button>
-          </Modal.Footer>
+                <Modal.Body className="centered-modal-body">
+                {/* <h3 style={{ color: 'black' }}>Previous Journal</h3> */}
+                <textarea disabled style={textareaStyle} value={journalValue}>
+                </textarea>
+                </Modal.Body>
+          </Modal.Body>
         </Modal>
                     
                 </div>

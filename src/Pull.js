@@ -16,19 +16,26 @@ import Card from 'react-bootstrap/Card';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import "./Pull.css";
 import { FaStar } from "react-icons/fa";
-// import process from 'process';
+import { listJournals} from './graphql/queries';
+import  {API} from 'aws-amplify';
+import {listLogins} from './graphql/queries';
+import { createJournal} from './graphql/mutations';
+import { BsFillGearFill } from 'react-icons/bs';
 
 function Pull() {
+    const [journalValue, setJournalValue] = useState("Select date for journal to show up here");
     const [dateValue, setSelectedDate] = useState(new Date())
+    const dateValueISO = dateValue.toISOString().slice(0,10);
     const handleDateChange = (date) => {
         setSelectedDate(date)
+        pullJournal(date.toISOString().slice(0,10))
     }
     const colors = {
         orange: "#FFBA5A",
         grey: "#a9a9a9"
       };
 
-    const [currentValue, setCurrentValue] = useState(0);
+  const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
   const stars = Array(5).fill(0)
     const starsbeautify = {
@@ -52,6 +59,7 @@ function Pull() {
         document.body.style.margin = 0;
         document.body.style.padding = 0;
         document.body.style.width = '100%';
+        pullJournal(dateValueISO)
       }, []);
 
       const [show, setShow] = useState(false);
@@ -69,8 +77,80 @@ function Pull() {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(`User entered: ${inputValue}`);
+
+        shareJournal(inputValue)
+
         handleClose();
+    }
+
+    const shareJournal = async (target) => {
+      const loginData = await API.graphql({
+        query: listLogins,
+        variables: {
+          filter: {
+            username: {
+              eq: target
+            }
+          }
+        }
+      })
+
+      if(loginData.data.listLogins.items[0] != null){
+        try {
+          await API.graphql({
+            query: createJournal,
+            variables: {
+              input: {
+                owner: loginData.data.listLogins.items[0].id, 
+                date: dateValueISO,
+                rate: currentValue,
+                text: journalValue,
+                share: true,
+                ownerShared: localStorage.getItem('username')
+              },
+            },
+          })
+          console.log('Successfully shared')
+        } catch (e) {
+          console.log(e)
+        }
+      }else{
+        console.log("This user does not exist")
       }
+      
+    }
+
+    const pullJournal = async (dateInput)=> {
+      try{
+        const journalData = await API.graphql({
+          query: listJournals,
+          variables: {
+            filter: {
+              owner:{
+                eq: localStorage.getItem('id')
+              },
+              date: {
+                eq: dateInput
+              },
+              share: {
+                eq: false
+              }
+            }
+          }
+        })
+        
+        if(journalData.data.listJournals.items[0]!= null){
+          setJournalValue(journalData.data.listJournals.items[0].text)
+          setCurrentValue(journalData.data.listJournals.items[0].rate)
+        }else{
+          setJournalValue("There are no journal entries saved for this date. Please select another date.")
+          setCurrentValue(0)
+        }
+  
+      }catch(e){
+        console.log(e)
+      }
+    }
 
     const textareaStyle = {
         backgroundColor: 'rgba(255, 255, 255, 0.80)',
@@ -87,10 +167,31 @@ function Pull() {
     const navigate = useNavigate();
     // const version = process.env.REACT_APP_VERSION;
     return (
-        <div className="backgroundImage">
-        <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white',  fontFamily: 'cursive'}}>MyJournal</h1>
-        
-        <Navbar bg="light" expand="lg" className="mx-auto my-navbar">
+      <div className="backgroundImage">
+        <Navbar expand="lg" className="mx-auto" style={{ backgroundColor: 'transparent' }}>
+        <Container>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mx-auto">
+              <Nav.Link style={{ backgroundColor: 'transparent', marginRight: '100px' }}></Nav.Link>
+              <Nav.Link style={{ backgroundColor: 'transparent', marginRight: '100px' }}></Nav.Link>
+              <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white', fontFamily: 'cursive', marginLeft: '300px' }}>MyJournal</h1>
+              <Dropdown style={{marginLeft: '400px'}}>
+                <Dropdown.Toggle variant="link" id="settings-dropdown" style={{ fontSize: '1.5rem', padding: '1rem', color: 'white'  }}>
+                  <BsFillGearFill />
+                </Dropdown.Toggle>
+                <Dropdown.Menu style={{ fontSize: '1rem', padding: '0.2rem', width: '50px', maxHeight: '200px' }} >
+                  <Dropdown.Item disabled={true} >Username</Dropdown.Item>
+                  <Dropdown.Item onClick={() => navigate('/', { replace: true })}>Log out</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              
+              
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <Navbar bg="light" expand="lg" className="mx-auto my-navbar">
         <Container  >
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -159,7 +260,7 @@ function Pull() {
           <h3 style={{ color: 'white' }}>Previous Journal</h3>
           {/* <textarea value={journalValue} onChange={handleJournalChange} style={textareaStyle} ref={textareaRef} onKeyDown={handleKeyDown}>
           </textarea> */}
-          <textarea disabled style={textareaStyle} placeholder="Select date for journal to show up here">
+          <textarea disabled style={textareaStyle} value={journalValue}>
           </textarea>
 
           <Navbar expand="lg" style={{ backgroundColor: 'transparent' }}>
@@ -179,7 +280,7 @@ function Pull() {
             <Modal.Title>Share</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form onSubmit={handleSubmit}>
+            <Form>
               <Form.Group>
                 <Form.Label>Enter Username</Form.Label>
                 <Form.Control

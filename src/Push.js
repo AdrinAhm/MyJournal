@@ -13,7 +13,9 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import { Navbar, Modal } from 'react-bootstrap';
 import { FaStar } from "react-icons/fa";
-// import { createJournal } from './graphql/mutations';
+import { createJournal} from './graphql/mutations';
+import  {API, Amplify} from 'aws-amplify';
+import { BsFillGearFill } from 'react-icons/bs';
 
 
 // import { Text, Grid } from "@nextui-org/react";
@@ -22,15 +24,23 @@ import { FaStar } from "react-icons/fa";
 function Push() {
   //database values
   // const [ownerValue, setOwnerValue] = useState("");
-  const [dateValue, setDateValue] = useState(new Date());
-  // const [ratingValue, setRatingValue] = useState();
-  const [journalValue, setJournalValue] = useState("");
-  // const [shareValue, setShareValue] = useState(0);
+    const [dateValue, setDateValue] = useState(new Date());
+    // const [ratingValue, setRatingValue] = useState();
+    const [journalValue, setJournalValue] = useState("");
+    const [buttonValue, setButtonValue] = useState("Save");
+    // const [shareValue, setShareValue] = useState(0);
+
+    const [idValue, setIdValue] = useState();
+
+    const idInput = (props) => {
+        setIdValue(props)
+    }
+ 
 
   // const handleOwnerChange = (event) => {
   //   setOwnerValue(event.target.value); //Adrin's value
   // };
-  const dateValueISO = dateValue.toISOString();
+  const dateValueISO = dateValue.toISOString().slice(0,10);
 
   const handleDateChange = (date) => {
     setDateValue(date);
@@ -47,29 +57,27 @@ function Push() {
   // //for database
   const newJournal = async (e) => {
     e.preventDefault()
-    const { target } = e
 
-    console.log(dateValueISO)
-    console.log(currentValue)
-    console.log(journalValue)
+    try {
+      await API.graphql({
+        query: createJournal,
+        variables: {
+          input: {
+            owner: localStorage.getItem('id'), //Need to get this value
+            date: dateValueISO,
+            rate: currentValue,
+            text: journalValue,
+            share: false
+          }
+        },
+      })
+      console.log('Successfully sent')
+    } catch (e) {
+      console.log(e)
+    }
 
-    // try {
-    //   await API.graphql({
-    //     query: createJournal,
-    //     variable: {
-    //       input: {
-    //         owner: "123", //ADRIN GIVE ME THIS XXXXXXXXXXXXXXX
-    //         date: dateValueISO,
-    //         rating: currentValue,
-    //         journal: journalValue,
-    //         share: false
-    //       },
-    //     },
-    //   })
-    //   console.log('Successfully sent')
-    // } catch (e) {
-    //   console.log(e)
-    // }
+    setButtonValue("SAVED!")
+    // navigate('/pull')
   }
   //end for database
 
@@ -169,8 +177,28 @@ function Push() {
   // const version = process.env.REACT_APP_VERSION;
   return (
     <div className="backgroundImage">
-      <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white', fontFamily: 'cursive' }}>MyJournal</h1>
-
+      <Navbar expand="lg" className="mx-auto" style={{ backgroundColor: 'transparent' }}>
+        <Container>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mx-auto">
+              <Nav.Link style={{ backgroundColor: 'transparent', marginRight: '100px' }}></Nav.Link>
+              <Nav.Link style={{ backgroundColor: 'transparent', marginRight: '100px' }}></Nav.Link>
+              <h1 style={{ textAlign: 'center', fontSize: '50px', color: 'white', fontFamily: 'cursive', marginLeft: '300px' }}>MyJournal</h1>
+              <Dropdown style={{marginLeft: '400px'}}>
+                <Dropdown.Toggle variant="link" id="settings-dropdown" style={{ fontSize: '1.5rem', padding: '1rem', color: 'white'  }}>
+                  <BsFillGearFill />
+                </Dropdown.Toggle>
+                <Dropdown.Menu  style={{ fontSize: '1rem', padding: '0.2rem', width: '50px', maxHeight: '200px' }} >
+                  <Dropdown.Item disabled={true} >Username</Dropdown.Item>
+                  <Dropdown.Item onClick={() => navigate('/', { replace: true })}>Log out</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      
       <Navbar bg="light" expand="lg" className="mx-auto my-navbar">
         <Container  >
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -261,7 +289,7 @@ function Push() {
             <Navbar.Collapse id="basic-navbar-nav" className="d-flex justify-content-center">
               <Nav className="mx-2">
                 <Button type="submit" variant="light" onClick={newJournal}>
-                  <h8 style={{ color: '#000' }}>Save</h8>
+                  <h8 style={{ color: '#000' }}>{buttonValue}</h8>
                 </Button>
               </Nav>
               {/* <Nav className="mx-2">

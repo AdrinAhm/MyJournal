@@ -74,7 +74,7 @@ export const schema = {
                 "owner": {
                     "name": "owner",
                     "isArray": false,
-                    "type": "ID",
+                    "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -194,5 +194,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.2",
-    "version": "5a31c5237627f30027ee91b1612e02dc"
+    "version": "7d1ac066a05177c75faa12aad1d36a43"
 };

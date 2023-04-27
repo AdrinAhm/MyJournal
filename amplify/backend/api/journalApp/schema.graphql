@@ -11,7 +11,7 @@ type Login @model  @aws_api_key{
 
 type Journal @model  @aws_api_key{
   id: ID!
-  owner: ID!
+  owner: String!
   date: String!
   rate: Int!
   text: String!
