@@ -7,8 +7,8 @@
           "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDate": "2023-05-03T22:38:00.606Z",
-              "apiKeyExpirationDays": 7,
+              "apiKeyExpirationDate": "2024-05-05T22:58:10.964Z",
+              "apiKeyExpirationDays": 365,
               "description": "new key"
             },
             "authenticationType": "API_KEY"
@@ -46,6 +46,54 @@
     }
   },
   "parameters": {
+    "AMPLIFY_storage_Loginfex63dj735cdtkg7gbwh4z466idev_arn": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "Loginfex63dj735cdtkg7gbwh4z466idev"
+        }
+      ]
+    },
+    "AMPLIFY_storage_Loginfex63dj735cdtkg7gbwh4z466idev_partitionKeyName": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "Loginfex63dj735cdtkg7gbwh4z466idev"
+        }
+      ]
+    },
+    "AMPLIFY_storage_Loginfex63dj735cdtkg7gbwh4z466idev_partitionKeyType": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "Loginfex63dj735cdtkg7gbwh4z466idev"
+        }
+      ]
+    },
+    "AMPLIFY_storage_Loginfex63dj735cdtkg7gbwh4z466idev_region": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "Loginfex63dj735cdtkg7gbwh4z466idev"
+        }
+      ]
+    },
+    "AMPLIFY_storage_Loginfex63dj735cdtkg7gbwh4z466idev_streamArn": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "Loginfex63dj735cdtkg7gbwh4z466idev"
+        }
+      ]
+    },
+    "AMPLIFY_storage_Loginfex63dj735cdtkg7gbwh4z466idev_tableName": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "Loginfex63dj735cdtkg7gbwh4z466idev"
+        }
+      ]
+    },
     "AMPLIFY_storage_journals_arn": {
       "usedBy": [
         {
