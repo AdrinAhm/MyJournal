@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Dropdown from 'react-dropdown';
+import { Dropdown } from 'react-bootstrap';
 import 'react-dropdown/style.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -26,6 +26,7 @@ function Pull() {
     const [journalValue, setJournalValue] = useState("Select date for journal to show up here");
     const [dateValue, setSelectedDate] = useState(new Date())
     const dateValueISO = dateValue.toISOString().slice(0,10);
+    const [userValue, setUserValue] = useState("Username")
     const handleDateChange = (date) => {
         setSelectedDate(date)
         pullJournal(date.toISOString().slice(0,10))
@@ -60,6 +61,7 @@ function Pull() {
         document.body.style.padding = 0;
         document.body.style.width = '100%';
         pullJournal(dateValueISO)
+        setUserValue(localStorage.getItem('username'))
       }, []);
 
       const [show, setShow] = useState(false);
@@ -76,14 +78,14 @@ function Pull() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(`User entered: ${inputValue}`);
-
+        
         shareJournal(inputValue)
 
         handleClose();
     }
 
     const shareJournal = async (target) => {
+
       const loginData = await API.graphql({
         query: listLogins,
         variables: {
@@ -181,7 +183,7 @@ function Pull() {
                   <BsFillGearFill />
                 </Dropdown.Toggle>
                 <Dropdown.Menu style={{ fontSize: '1rem', padding: '0.2rem', width: '50px', maxHeight: '200px' }} >
-                  <Dropdown.Item disabled={true} >Username</Dropdown.Item>
+                  <Dropdown.Item disabled={true} >{userValue}</Dropdown.Item>
                   <Dropdown.Item onClick={() => navigate('/', { replace: true })}>Log out</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>

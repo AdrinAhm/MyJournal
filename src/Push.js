@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Dropdown from 'react-dropdown';
+import { Dropdown } from 'react-bootstrap';
 import 'react-dropdown/style.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -28,6 +28,8 @@ function Push() {
     // const [ratingValue, setRatingValue] = useState();
     const [journalValue, setJournalValue] = useState("");
     const [buttonValue, setButtonValue] = useState("Save");
+    const [userValue, setUserValue] = useState("Username")
+    const [currentValue, setCurrentValue] = useState(0);
     // const [shareValue, setShareValue] = useState(0);
 
     const [idValue, setIdValue] = useState();
@@ -43,6 +45,9 @@ function Push() {
   const dateValueISO = dateValue.toISOString().slice(0,10);
 
   const handleDateChange = (date) => {
+    setJournalValue("")
+    setButtonValue("Save")
+    setCurrentValue(0)
     setDateValue(date);
   };
 
@@ -89,6 +94,7 @@ function Push() {
     document.body.style.margin = 0;
     document.body.style.padding = 0;
     document.body.style.width = '100%';
+    setUserValue(localStorage.getItem('username'))
   }, []);
 
   const textareaRef = useRef(null);
@@ -108,7 +114,7 @@ function Push() {
     orange: "#FFBA5A",
     grey: "#a9a9a9"
   };
-  const [currentValue, setCurrentValue] = useState(0);
+  
   const [hoverValue, setHoverValue] = useState(undefined);
   const stars = Array(5).fill(0)
 
@@ -190,7 +196,7 @@ function Push() {
                   <BsFillGearFill />
                 </Dropdown.Toggle>
                 <Dropdown.Menu  style={{ fontSize: '1rem', padding: '0.2rem', width: '50px', maxHeight: '200px' }} >
-                  <Dropdown.Item disabled={true} >Username</Dropdown.Item>
+                  <Dropdown.Item disabled={true} >{userValue}</Dropdown.Item>
                   <Dropdown.Item onClick={() => navigate('/', { replace: true })}>Log out</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>

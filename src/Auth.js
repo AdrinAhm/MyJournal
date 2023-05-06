@@ -10,6 +10,12 @@ import background from "./Pictures/loginbackgroundimage.jpg";
 
 export default function (props) {
 
+  useEffect(() => {
+    document.body.style.margin = 0;
+    document.body.style.padding = 0;
+    document.body.style.width = '100%';
+  }, []);
+
   const login = async (e) => {
     e.preventDefault()
     const { target } = e
@@ -33,9 +39,6 @@ export default function (props) {
     } else {
       errorLogin("error-label")
     }
-
-
-    console.log(loginData)
   }
 
   const newLogin = async (e) => {

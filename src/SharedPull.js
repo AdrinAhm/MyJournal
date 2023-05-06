@@ -52,8 +52,6 @@ function SharedPull() {
           }
         })
 
-        console.log(journalData.data.listJournals.items)
-
         setSharedJournals(journalData.data.listJournals.items)
 
         //We have to list the documents
@@ -101,7 +99,6 @@ function SharedPull() {
   const handleClose = () => setShow(false);
 
   const handleShow = (event, index) => {
-    console.log(sharedJournals[index].text)
     setJournalValue(sharedJournals[index].text)
     setCurrentValue(sharedJournals[index].rate)
 
@@ -158,7 +155,6 @@ function SharedPull() {
                 </Dropdown.Menu>
               </Dropdown>
               
-              
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -211,12 +207,12 @@ function SharedPull() {
 
                 {sharedJournals.map((sharedJournal, index) => (
                   <Nav className="mx-auto">
-                  <div class="mail-button-container">
-                    <label style={{color: "white", fontSize: "20px"}} for="mail-button">{sharedJournal.ownerShared}</label>
-                     <li key = {index} onClick={event => handleShow(event, index)} className="mail-button">
-                         <AiOutlineMail />
-                     </li>
-                   </div>
+                    <div class="mail-button-container">
+                      <label style={{color: "white", fontSize: "20px"}} for="mail-button">{sharedJournal.ownerShared}</label>
+                      <li key = {index} onClick={event => handleShow(event, index)} className="mail-button">
+                          <AiOutlineMail />
+                      </li>
+                    </div>
                    </Nav>
                 ))}
 
