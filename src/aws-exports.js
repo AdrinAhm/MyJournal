@@ -3,14 +3,14 @@
 
 const awsmobile = {
     "aws_project_region": "us-east-2",
-    "aws_appsync_graphqlEndpoint": "https://zky6mbhig5gljfup6aazdonkcu.appsync-api.us-east-2.amazonaws.com/graphql",
+    "aws_appsync_graphqlEndpoint": "https://5ptyq4777bh25i37vwnpwsabj4.appsync-api.us-east-2.amazonaws.com/graphql",
     "aws_appsync_region": "us-east-2",
     "aws_appsync_authenticationType": "API_KEY",
-    "aws_appsync_apiKey": "da2-wbbpe6ukwfcmxegz6vqxwkhbkq",
-    "aws_cognito_identity_pool_id": "us-east-2:04b694be-e42d-4dba-9f63-3e34c784e9b9",
+    "aws_appsync_apiKey": "da2-mocuufnv5rguplldjbfiikkvjm",
+    "aws_cognito_identity_pool_id": "us-east-2:b285add6-8edd-4688-813b-38146ca77436",
     "aws_cognito_region": "us-east-2",
-    "aws_user_pools_id": "us-east-2_8YZQpNwkI",
-    "aws_user_pools_web_client_id": "6ja4v7sc0thj2v0tbni7kho2o3",
+    "aws_user_pools_id": "us-east-2_trPyxS2OI",
+    "aws_user_pools_web_client_id": "3bbgs0b868gukui0v9jdtg8lrf",
     "oauth": {},
     "aws_cognito_username_attributes": [],
     "aws_cognito_social_providers": [],
@@ -31,11 +31,11 @@ const awsmobile = {
     "aws_dynamodb_all_tables_region": "us-east-2",
     "aws_dynamodb_table_schemas": [
         {
-            "tableName": "Login-fex63dj735cdtkg7gbwh4z466i-dev",
+            "tableName": "journals",
             "region": "us-east-2"
         },
         {
-            "tableName": "Login-fex63dj735cdtkg7gbwh4z466i-dev",
+            "tableName": "PullJournalsTable",
             "region": "us-east-2"
         }
     ]

@@ -210,9 +210,9 @@ function Push() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mx-auto">
-              <Nav.Link className="my-nav-link" href="push" style={{ marginRight: '250px' }}>Write Journal</Nav.Link>
-              <Nav.Link className="my-nav-link" href="pull" style={{ marginRight: '250px' }}>Previous Journals</Nav.Link>
-              <Nav.Link className="my-nav-link" href="sharedpull">Shared Journals</Nav.Link>
+              <Nav.Link className="my-nav-link" onClick={() => navigate('/push')} style={{ marginRight: '250px' }}>Write Journal</Nav.Link>
+              <Nav.Link className="my-nav-link" onClick={() => navigate('/pull')}  style={{ marginRight: '250px' }}>Previous Journals</Nav.Link>
+              <Nav.Link className="my-nav-link" onClick={() => navigate('/sharedpull')} >Shared Journals</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

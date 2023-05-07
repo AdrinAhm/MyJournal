@@ -67,5 +67,49 @@
         "journalapp": {}
       }
     }
+  },
+  "main": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-journalapp-main-202344-authRole",
+      "UnauthRoleArn": "arn:aws:iam::835404145329:role/amplify-journalapp-main-202344-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::835404145329:role/amplify-journalapp-main-202344-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-journalapp-main-202344-deployment",
+      "UnauthRoleName": "amplify-journalapp-main-202344-unauthRole",
+      "StackName": "amplify-journalapp-main-202344",
+      "StackId": "arn:aws:cloudformation:us-east-2:835404145329:stack/amplify-journalapp-main-202344/6d5c4f70-ec6d-11ed-889f-066edec4393b",
+      "AmplifyAppId": "d2af11xyxzt2xe"
+    },
+    "categories": {
+      "auth": {
+        "journalapp2a80a0d6": {}
+      },
+      "storage": {
+        "Loginfex63dj735cdtkg7gbwh4z466idev": {
+          "tableName": "journals",
+          "region": "us-east-2",
+          "arn": "arn:aws:dynamodb:us-east-2:835404145329:table/journals",
+          "partitionKeyName": "userID",
+          "partitionKeyType": "S"
+        },
+        "journals": {
+          "tableName": "PullJournalsTable",
+          "region": "us-east-2",
+          "arn": "arn:aws:dynamodb:us-east-2:835404145329:table/PullJournalsTable",
+          "partitionKeyName": "id",
+          "partitionKeyType": "S"
+        },
+        "PullJournalsTable": {}
+      },
+      "api": {
+        "journalapp": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2af11xyxzt2xe",
+          "type": "manual"
+        }
+      }
+    }
   }
 }

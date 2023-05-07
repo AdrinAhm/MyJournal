@@ -45,7 +45,30 @@
       "service": "Cognito"
     }
   },
+  "hosting": {
+    "amplifyhosting": {
+      "providerPlugin": "awscloudformation",
+      "service": "amplifyhosting",
+      "type": "manual"
+    }
+  },
   "parameters": {
+    "AMPLIFY_hosting_amplifyhosting_appId": {
+      "usedBy": [
+        {
+          "category": "hosting",
+          "resourceName": "amplifyhosting"
+        }
+      ]
+    },
+    "AMPLIFY_hosting_amplifyhosting_type": {
+      "usedBy": [
+        {
+          "category": "hosting",
+          "resourceName": "amplifyhosting"
+        }
+      ]
+    },
     "AMPLIFY_storage_Loginfex63dj735cdtkg7gbwh4z466idev_arn": {
       "usedBy": [
         {
@@ -71,14 +94,6 @@
       ]
     },
     "AMPLIFY_storage_Loginfex63dj735cdtkg7gbwh4z466idev_region": {
-      "usedBy": [
-        {
-          "category": "storage",
-          "resourceName": "Loginfex63dj735cdtkg7gbwh4z466idev"
-        }
-      ]
-    },
-    "AMPLIFY_storage_Loginfex63dj735cdtkg7gbwh4z466idev_streamArn": {
       "usedBy": [
         {
           "category": "storage",
@@ -126,14 +141,6 @@
         }
       ]
     },
-    "AMPLIFY_storage_journals_streamArn": {
-      "usedBy": [
-        {
-          "category": "storage",
-          "resourceName": "journals"
-        }
-      ]
-    },
     "AMPLIFY_storage_journals_tableName": {
       "usedBy": [
         {
@@ -145,6 +152,12 @@
   },
   "storage": {
     "Loginfex63dj735cdtkg7gbwh4z466idev": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB",
+      "serviceType": "imported"
+    },
+    "PullJournalsTable": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB",
