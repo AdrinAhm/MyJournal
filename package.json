@@ -2,7 +2,6 @@
   "name": "journal-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "{myjournal.site}/#/",
   "dependencies": {
     "@aws-amplify/api": "^5.0.15",
     "@aws-amplify/pubsub": "^5.0.15",
