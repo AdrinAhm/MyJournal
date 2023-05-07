@@ -188,9 +188,6 @@ export default function (props) {
                 Submit
               </button>
             </div>
-            <p className="text-center mt-2">
-              Forgot <a href="#">password?</a>
-            </p>
             <p id="error-label-signup" className="error-login">
                 This user already exists
             </p>
