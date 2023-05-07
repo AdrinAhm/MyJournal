@@ -3,8 +3,6 @@ import "./Auth.css"
 import App from "./App"; 
 import { useNavigate } from 'react-router-dom';
 import background from "./Pictures/loginbackgroundimage.jpg";
-import PushComponent from './Push';
-import Push from "./Push";
 
 
 export default function (props) {
@@ -26,7 +24,7 @@ export default function (props) {
     element.style.visibility = "visible"
   }
   const variableToPass = 'Hello';
-  Push(variableToPass)
+ 
   if (authMode === "signin") {
 
     return (
