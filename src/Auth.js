@@ -134,9 +134,6 @@ export default function (props) {
                   Submit
                 </button>
               </div>
-              <p className="text-center mt-2">
-                Forgot <a href="#">password?</a>
-              </p>
               <p id="error-label" className="error-login">
                 Username or password is incorrect
               </p>
